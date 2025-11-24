@@ -1,139 +1,172 @@
 .selectbox-wrapper {
   position: relative;
-  display: inline-block;
-  min-width: 20rem;
   width: 100%;
+  min-width: 20rem;
 
   &.disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     pointer-events: none;
   }
 }
 
 .selectbox-button {
   width: 100%;
-  padding: 10px 12px;
-  font-size: 14px;
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--text-base);
   text-align: left;
-
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #fff;
-
+  border-radius: var(--radius-xl);
+  border: 0.1rem solid rgba(15, 23, 42, 0.1);
+  background: rgba(248, 250, 255, 0.9);
+  color: var(--color-foreground);
   cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   position: relative;
 
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-
   &.placeholder {
-    color: #999;
+    color: var(--color-text-tertiary);
   }
 
-  &:focus {
+  &:hover:not(:disabled) {
+    border-color: rgba(99, 102, 241, 0.4);
+  }
+
+  // 포커스시 시각적 아웃라인 통일
+  &:focus-visible {
     outline: none;
-    border-color: #2684ff;
-    box-shadow: 0 0 0 3px rgba(38, 132, 255, 0.25);
-  }
-
-  &:disabled {
-    background-color: #f5f5f5;
-    color: #aaa;
-    cursor: not-allowed;
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 0 0 0.4rem rgba(99, 102, 241, 0.15); // 통일된 사이즈
+    background: #fff;
   }
 
   &::after {
     content: '';
     position: absolute;
-    right: 10px;
+    right: var(--space-md);
     top: 50%;
-    width: 6px;
-    height: 6px;
-
-    border-left: 1.5px solid #555;
-    border-bottom: 1.5px solid #555;
-    transform: translateY(-50%) rotate(-45deg);
+    right: 1rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-right: 0.2rem solid currentColor;
+    border-bottom: 0.2rem solid currentColor;
+    transform: translateY(-50%) rotate(45deg);
+    transition: transform 0.3s ease;
     pointer-events: none;
-    transition: 0.3s;
   }
 
-  &.open::after {
-    transform: translateY(-50%) rotate(-225deg);
+  &.open {
+    box-shadow: 0 0 0 0.4rem rgba(99, 102, 241, 0.15);
+
+    &::after {
+      transform: translateY(-50%) rotate(-135deg);
+    }
   }
 }
 
 .selectbox-options {
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + var(--space-xs));
   left: 0;
   width: 100%;
-  max-height: 180px;
-
+  max-height: 22rem;
   overflow-y: auto;
-  z-index: 10;
-
+  border-radius: var(--radius-xl);
+  border: 0.1rem solid rgba(15, 23, 42, 0.08);
   background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-
-  padding: 4px 0;
-  margin: 0;
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2rem 4rem rgba(15, 23, 42, 0.18);
+  z-index: 1000;
+  color: var(--color-foreground);
+  padding: var(--space-xs) 0;
 }
 
 .selectbox-option {
-  padding: 10px 12px;
-  font-size: 14px;
+  padding: var(--space-sm) var(--space-xl);
+  font-size: var(--text-base);
+  color: var(--color-foreground);
   cursor: pointer;
-
-  transition: background-color 0.12s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 
   &:hover {
-    background-color: #f6f6f6;
+    background: rgba(99, 102, 241, 0.08);
   }
 
   &.highlight {
-    background-color: #eaf3ff;
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--color-primary);
   }
 
   &.selected {
-    font-weight: 600;
-    background-color: #f0f7ff;
+    font-weight: var(--font-weight-semibold);
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--color-primary);
   }
 
-  &:focus {
+  // 포커스시 시각적 아웃라인 통일
+  &:focus-visible {
     outline: none;
-    background-color: #eaf3ff;
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--color-primary);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 0 0 0.4rem rgba(99, 102, 241, 0.15);
   }
 }
 
-.selectbox-native {
-  min-width: 20rem;
+/* 기본 셀렉트도 커스텀처럼 화살표 배치 */
+.selectbox-native-wrapper {
+  position: relative;
   width: 100%;
-  padding: 10px 12px;
-  font-size: 14px;
+  min-width: 20rem;
+}
 
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #fff;
+.selectbox-native {
+  width: 100%;
+  height: 4.6rem;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-xl);
+  border: 0.1rem solid rgba(15, 23, 42, 0.1);
+  background: rgba(248, 250, 255, 0.95);
+  color: var(--color-foreground);
+  font-size: var(--text-base);
+  appearance: none;
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
 
-  &.placeholder {
-    color: #999;
-  }
-
-  &:not(.placeholder) {
-    color: #333;
-  }
-
-  &:disabled {
-    background-color: #f5f5f5;
-    color: #aaa;
+  // 포커스시 시각적 아웃라인 통일
+  &:focus-visible {
+    outline: none;
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 0 0 0.4rem rgba(99, 102, 241, 0.15); // 통일된 사이즈
+    background: #fff;
   }
 
   option {
-    color: #333;
-    &:disabled {
+    &:first-child {
       display: none;
     }
   }
+
+  &:hover:not(:disabled) {
+    border-color: rgba(99, 102, 241, 0.4);
+  }
+
+  &.placeholder {
+    color: var(--color-text-tertiary);
+  }
+}
+
+/* select에 커스텀 화살표 추가 */
+.selectbox-native-wrapper::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  right: var(--space-md);
+  top: 50%;
+  right: 1rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-right: 0.2rem solid currentColor;
+  border-bottom: 0.2rem solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
+  transition: transform 0.3s ease;
+  color: var(--color-text-tertiary);
 }

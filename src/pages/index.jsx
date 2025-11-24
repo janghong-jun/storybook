@@ -18,86 +18,227 @@ export default function Main() {
       : '데스크탑'
 
   return (
-    <div className="main">
-      {/* Hero section */}
-      <section className="main-hero" aria-labelledby="main-hero-title">
-        <div className="main-hero-content">
-          <p className="main-hero-tag">반응형 샘플 메인 화면</p>
-          <h1 id="main-hero-title">내 사이트 이름</h1>
-          <p className="main-hero-desc">
-            화면 크기에 따라 레이아웃이 자연스럽게 변하는 샘플 메인 화면입니다.
-            데스크탑, 태블릿, 모바일에서 구조와 여백을 확인해 보세요.
-          </p>
-          <div className="main-hero-actions">
-            <button type="button" className="btn primary large">
-              시작하기
-            </button>
-            <button type="button" className="btn secondary large">
-              자세히 보기
-            </button>
-          </div>
-          <p className="main-hero-viewport">
-            {viewport && (
-              <span>
-                현재 <strong>{viewportLabel}</strong> 뷰포트입니다.
-              </span>
-            )}
-          </p>
-        </div>
-
-        <div className="main-hero-panel" aria-hidden="true">
-          <div className="main-hero-panel-card">
-            <span className="main-hero-chip">실시간 미리보기</span>
-            <p className="main-hero-panel-text">
-              브레이크포인트는 768px, 1024px 기준입니다.
+    <div className="home">
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="hero-container">
+          <div className="hero-content">
+            <div className="hero-badge">반응형 웹 디자인</div>
+            <h1 className="hero-title">
+              심플하고
+              <br />
+              <span className="hero-title-accent">아름다운</span>
+              <br />
+              홈페이지
+            </h1>
+            <p className="hero-description">
+              최신 디자인 트렌드를 반영한 반응형 웹사이트입니다.
+              <br />
+              모든 디바이스에서 완벽한 경험을 제공합니다.
             </p>
+            <div className="hero-actions">
+              <button type="button" className="btn btn-primary btn-lg">
+                시작하기
+              </button>
+              <button type="button" className="btn btn-secondary btn-lg">
+                자세히 보기
+              </button>
+            </div>
+            <div className="hero-stats">
+              <div className="stat">
+                <div className="stat-number">100%</div>
+                <div className="stat-label">반응형</div>
+              </div>
+              <div className="stat">
+                <div className="stat-number">10px</div>
+                <div className="stat-label">루트 사이즈</div>
+              </div>
+              <div className="stat">
+                <div className="stat-number">모던</div>
+                <div className="stat-label">디자인</div>
+              </div>
+            </div>
+          </div>
+          <div className="hero-visual">
+            <div className="hero-card">
+              <div className="hero-card-header">
+                <div className="hero-card-avatar"></div>
+                <div className="hero-card-info">
+                  <div className="hero-card-name">Modern Design</div>
+                  <div className="hero-card-time">방금 전</div>
+                </div>
+              </div>
+              <div className="hero-card-content">
+                <p>반응형 디자인으로 모든 디바이스에서 완벽하게 표시됩니다.</p>
+                <div className="hero-card-devices">
+                  <div className="device device-mobile"></div>
+                  <div className="device device-tablet"></div>
+                  <div className="device device-desktop"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="hero-bg-pattern"></div>
+      </section>
+
+      {/* Features Section */}
+      <section className="features">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">주요 특징</h2>
+            <p className="section-subtitle">
+              최신 웹 기술로 구현된 아름다운 디자인
+            </p>
+          </div>
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">🎨</div>
+              <h3 className="feature-title">심플한 디자인</h3>
+              <p className="feature-description">
+                불필요한 요소를 제거하고 핵심에 집중한 깔끔한 디자인입니다.
+              </p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">📱</div>
+              <h3 className="feature-title">완벽한 반응형</h3>
+              <p className="feature-description">
+                모바일, 태블릿, 데스크탑 모든 화면에서 최적화된 경험을
+                제공합니다.
+              </p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">⚡</div>
+              <h3 className="feature-title">빠른 성능</h3>
+              <p className="feature-description">
+                최적화된 코드로 빠른 로딩 속도와 부드러운 사용자 경험을
+                보장합니다.
+              </p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">🔧</div>
+              <h3 className="feature-title">쉬운 유지보수</h3>
+              <p className="feature-description">
+                체계적인 코드 구조로 유지보수와 확장이 용이합니다.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Features section */}
-      <section className="main-features" aria-label="주요 특징">
-        <h2 className="main-section-title">주요 특징</h2>
-        <div className="main-features-grid">
-          <article className="main-feature-card">
-            <h3>단일 소스 구조</h3>
-            <p>
-              한 가지 마크업으로 모바일·태블릿·데스크탑 레이아웃을 모두
-              커버합니다.
-            </p>
-          </article>
-          <article className="main-feature-card">
-            <h3>섹션 기반 레이아웃</h3>
-            <p>
-              히어로, 특징, CTA 섹션으로 나뉘어 있어 실제 서비스 메인 구조로
-              확장하기 쉽습니다.
-            </p>
-          </article>
-          <article className="main-feature-card">
-            <h3>디자인 토큰 활용</h3>
-            <p>
-              색상과 간격은 기존 전역 토큰(변수)을 사용해 사이트 전체 톤앤매너를
-              유지합니다.
-            </p>
-          </article>
+      {/* Stats Section */}
+      <section className="stats">
+        <div className="container">
+          <div className="stats-grid">
+            <div className="stat-item">
+              <div className="stat-number">2024</div>
+              <div className="stat-label">최신 트렌드</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">100%</div>
+              <div className="stat-label">반응형</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">10px</div>
+              <div className="stat-label">루트 사이즈</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">∞</div>
+              <div className="stat-label">확장성</div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Call to Action section */}
-      <section className="main-cta" aria-labelledby="main-cta-title">
-        <div className="main-cta-inner">
-          <div>
-            <h2 id="main-cta-title">프로젝트에 바로 적용해 보세요</h2>
-            <p className="main-cta-desc">
-              이 메인 화면 구조와 스타일을 복사해서 실제 서비스 초기 화면에 맞게
-              텍스트와 이미지만 교체해도 됩니다.
+      {/* CTA Section */}
+      <section className="cta">
+        <div className="container">
+          <div className="cta-content">
+            <h2 className="cta-title">지금 바로 시작하세요</h2>
+            <p className="cta-description">
+              심플하고 아름다운 디자인으로 프로젝트의 완성도를 높여보세요.
             </p>
+            <div className="cta-actions">
+              <button type="button" className="btn btn-primary btn-lg">
+                프로젝트 시작하기
+              </button>
+              <button type="button" className="btn btn-ghost btn-lg">
+                문의하기
+              </button>
+            </div>
           </div>
-          <button type="button" className="btn primary large">
-            컴포넌트 살펴보기
-          </button>
+          <div className="cta-visual">
+            <div className="cta-card">
+              <div className="cta-card-content">
+                <h3>Ready to Launch</h3>
+                <p>모든 준비가 완료되었습니다.</p>
+                <div className="cta-progress">
+                  <div className="progress-bar">
+                    <div className="progress-fill"></div>
+                  </div>
+                  <span className="progress-text">100%</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-content">
+            <div className="footer-brand">
+              <h3>Modern Design</h3>
+              <p>심플하고 아름다운 웹 디자인</p>
+            </div>
+            <div className="footer-links">
+              <div className="footer-section">
+                <h4>서비스</h4>
+                <ul>
+                  <li>
+                    <a href="#">디자인</a>
+                  </li>
+                  <li>
+                    <a href="#">개발</a>
+                  </li>
+                  <li>
+                    <a href="#">컨설팅</a>
+                  </li>
+                </ul>
+              </div>
+              <div className="footer-section">
+                <h4>회사</h4>
+                <ul>
+                  <li>
+                    <a href="#">소개</a>
+                  </li>
+                  <li>
+                    <a href="#">블로그</a>
+                  </li>
+                  <li>
+                    <a href="#">연락처</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p>&copy; 2024 Modern Design. All rights reserved.</p>
+            <div className="footer-social">
+              <a href="#" aria-label="Twitter">
+                𝕏
+              </a>
+              <a href="#" aria-label="GitHub">
+                🐙
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                💼
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

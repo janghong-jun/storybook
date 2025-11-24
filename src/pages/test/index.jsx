@@ -102,7 +102,6 @@ export default function DemoPage() {
       />
       <Breadcrumb
         items={[
-          { label: '홈', href: '/' },
           { label: 'UI 컴포넌트', href: '/ui' },
           { label: '테스트', href: '/ui/test' },
         ]}

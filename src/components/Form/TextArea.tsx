@@ -72,7 +72,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
         </label>
       )}
 
-      <div className="textarea-field-wrap">
+      <div className={`textarea-field-wrap${error ? ' has-error' : ''}`}>
         <textarea
           id={textareaId}
           className={`textarea-field${error ? ' textarea-error' : ''}`}

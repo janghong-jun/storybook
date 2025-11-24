@@ -15,6 +15,7 @@ export default function Header() {
           onClick={() => {
             // 모바일 메뉴 닫기
             const event = new CustomEvent('closeMobileMenu')
+            document.body.scrollTo({ top: 0 })
             window.dispatchEvent(event)
           }}
         >

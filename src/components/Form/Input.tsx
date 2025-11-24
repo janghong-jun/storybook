@@ -55,7 +55,7 @@ export const Input: React.FC<InputProps> = ({
           {label}
         </label>
       )}
-      <div className="input-field-wrap">
+      <div className={`input-field-wrap${error ? ' has-error' : ''}`}>
         {' '}
         {/* 오타 수정: flield → field */}
         <input

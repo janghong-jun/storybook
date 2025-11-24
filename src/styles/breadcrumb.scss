@@ -14,13 +14,13 @@
   &-item {
     display: flex;
     align-items: center;
-    font-size: 1.2rem;
-    color: #333;
+    font-size: var(--text-sm);
+    color: var(--color-foreground);
 
     &::after {
       content: '>';
-      margin: 0 0.5rem;
-      color: #666;
+      margin: 0 var(--space-xs);
+      color: var(--color-muted);
     }
 
     &:last-child::after {
@@ -29,11 +29,13 @@
     }
 
     &.home {
+      min-height: auto;
+
       .breadcrumb-link {
         display: flex;
         text-decoration: none;
         align-items: center;
-        gap: 0.4rem;
+        gap: var(--space-xs);
 
         span {
           text-decoration: underline;
@@ -44,6 +46,8 @@
           span {
             text-decoration: none;
           }
+          outline: 0.2rem solid var(--color-primary);
+          outline-offset: 0.2rem;
         }
 
         &::before {
@@ -52,24 +56,28 @@
           height: 1.6rem;
           background: url('/images/common/icon_home.svg') no-repeat 50% 50% /
             1.6rem 1.6rem;
+          flex-shrink: 0;
         }
       }
     }
 
     .breadcrumb-link {
-      padding: 0 0.4rem;
-      font-size: 1.5rem;
-      color: #1e2124;
+      padding: 0 var(--space-xs);
+      font-size: var(--text-base);
+      color: var(--color-foreground);
       text-decoration: underline;
       text-underline-offset: 0.3rem;
-      border-radius: 0.6rem;
+      border-radius: var(--radius-sm);
+      transition: background-color 0.2s ease;
 
       &:hover {
-        background-color: #eef2f7;
+        background-color: var(--color-bg-hover);
       }
 
       &:focus {
         text-decoration: none;
+        outline: 0.2rem solid var(--color-primary);
+        outline-offset: 0.2rem;
       }
     }
   }

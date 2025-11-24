@@ -3,7 +3,6 @@ import React, {
   useContext,
   useState,
   useEffect,
-  useCallback,
   ReactNode,
 } from 'react'
 
@@ -24,17 +23,20 @@ export const ViewportProvider = ({ children }: { children: ReactNode }) => {
     return 'desktop'
   }
 
-  const [viewport, setViewport] = useState<Viewport>('desktop')
+  const [viewport, setViewport] = useState<Viewport | null>(null)
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const handleResize = () =>
-        setViewport(getViewportFromWidth(window.innerWidth))
-      queueMicrotask(() => setViewport(getViewportFromWidth(window.innerWidth)))
-      window.addEventListener('resize', handleResize)
-      return () => window.removeEventListener('resize', handleResize)
-    }
+    if (typeof window === 'undefined') return
+
+    const apply = () => setViewport(getViewportFromWidth(window.innerWidth))
+
+    apply()
+
+    window.addEventListener('resize', apply)
+    return () => window.removeEventListener('resize', apply)
   }, [])
+
+  if (!viewport) return null
 
   return (
     <ViewportContext.Provider value={{ viewport }}>

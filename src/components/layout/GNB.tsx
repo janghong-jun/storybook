@@ -13,19 +13,19 @@ const menuData: MenuItem[] = [
   {
     label: 'About',
     children: [
-      { label: 'Our Team', href: '#2' },
-      { label: 'Company', href: '#3' },
+      { label: 'Our Team', href: '2' },
+      { label: 'Company', href: '3' },
     ],
   },
   {
     label: 'Services',
     children: [
-      { label: 'Web Development', href: '#4' },
-      { label: 'App Development', href: '#5' },
-      { label: 'UX Design', href: '#6' },
+      { label: 'Web Development', href: '4' },
+      { label: 'App Development', href: '5' },
+      { label: 'UX Design', href: '6' },
     ],
   },
-  { label: 'Contact', href: '#7' },
+  { label: 'Contact', href: '7' },
 ]
 
 interface GNBProps {
@@ -147,7 +147,9 @@ const GNB: React.FC<GNBProps> = ({ containerRef }) => {
             ) : (
               <Link
                 href={item.href ?? '#'}
-                onClick={() => setMobileOpen(false)}
+                onClick={() => {
+                  setMobileOpen(false)
+                }}
               >
                 {item.label}
               </Link>
@@ -158,7 +160,10 @@ const GNB: React.FC<GNBProps> = ({ containerRef }) => {
                   <li key={cidx} role="none">
                     <Link
                       href={child.href ?? '#'}
-                      onClick={() => setMobileOpen(false)}
+                      onClick={() => {
+                        setMobileOpen(false)
+                        document.body.scrollTo({ top: 0 })
+                      }}
                     >
                       {child.label}
                     </Link>

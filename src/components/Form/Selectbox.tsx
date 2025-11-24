@@ -132,23 +132,25 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
   // ==============================
   if (!custom) {
     return (
-      <select
-        className={`selectbox-native ${className} ${
-          !selected ? 'placeholder' : ''
-        }`}
-        value={selected ?? ''}
-        onChange={(e) => handleSelect(e.target.value)}
-        disabled={disabled}
-      >
-        <option value="" disabled>
-          {placeholder}
-        </option>
-        {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
+      <div className="selectbox-native-wrapper">
+        <select
+          className={`selectbox-native ${className} ${
+            !selected ? 'placeholder' : ''
+          }`}
+          value={selected ?? ''}
+          onChange={(e) => handleSelect(e.target.value)}
+          disabled={disabled}
+        >
+          <option value="" disabled>
+            {placeholder}
           </option>
-        ))}
-      </select>
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+      </div>
     )
   }
 
@@ -158,7 +160,9 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`selectbox-wrapper${className ? ` ${className}` : ''}`}
+      className={`selectbox-wrapper${disabled ? ' disabled' : ''}${
+        className ? ` ${className}` : ''
+      }`}
     >
       <button
         type="button"

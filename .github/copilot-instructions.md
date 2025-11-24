@@ -5,7 +5,6 @@ This is a **Next.js + Storybook component library** project focused on building 
 ## Architecture Overview
 
 ### Project Structure
-
 - **`src/components/UI/`**: Reusable UI components (Breadcrumb, Button, Modal, etc.)
 - **`src/components/Form/`**: Form-related components (Input, Checkbox, SelectBox, etc.)
 - **`src/components/layout/`**: Layout wrapper components
@@ -14,7 +13,6 @@ This is a **Next.js + Storybook component library** project focused on building 
 - **`src/styles/`**: Global SCSS styles organized by component
 
 ### Technology Stack
-
 - **Framework**: Next.js 16 (Pages Router) + React 19
 - **Styling**: SCSS modules (organized per component)
 - **Component Documentation**: Storybook 10 with `@storybook/nextjs-vite`
@@ -24,7 +22,6 @@ This is a **Next.js + Storybook component library** project focused on building 
 ## Development Workflow
 
 ### Essential Commands
-
 - `npm run d` - Start Next.js dev server (localhost:3000)
 - `npm run s` - Start Storybook (localhost:6006)
 - `npm run build` - Build Next.js app
@@ -32,7 +29,6 @@ This is a **Next.js + Storybook component library** project focused on building 
 - `npm run lint` - Run ESLint
 
 ### Storybook-First Development
-
 1. Create component in `src/components/{category}/{ComponentName}.tsx`
 2. Create paired story file: `{ComponentName}.stories.tsx`
 3. Use Meta/Story pattern with TypeScript: `satisfies Meta<typeof Component>`
@@ -42,19 +38,15 @@ This is a **Next.js + Storybook component library** project focused on building 
 ## Component Conventions
 
 ### Component File Structure
-
 Each component has an accompanying `.stories.tsx` file:
-
 ```tsx
 // ✓ Correct pattern
-;-Breadcrumb.tsx - // Component implementation
-  Breadcrumb.stories.tsx // Stories + documentation
+- Breadcrumb.tsx         // Component implementation
+- Breadcrumb.stories.tsx // Stories + documentation
 ```
 
 ### Props Documentation
-
 Document all props with JSDoc comments and TypeScript interfaces:
-
 ```tsx
 export interface ComponentProps {
   /** Brief description of prop */
@@ -63,9 +55,7 @@ export interface ComponentProps {
 ```
 
 ### Styling Pattern
-
 Each component has a corresponding SCSS file imported globally:
-
 - Component styles: `src/styles/component-name.scss`
 - All styles unified in `src/styles/globals.scss` via `@use`
 - Use BEM-like naming: `.component-name`, `.component-name-item`
@@ -73,18 +63,14 @@ Each component has a corresponding SCSS file imported globally:
 ## Key Integration Points
 
 ### Context & Providers
-
 - `ViewportProvider` wraps entire app (src/contexts/viewPortContext.tsx)
 - Layout wrapper available via `getLayout` pattern in pages
 
 ### Remote Images
-
 Next.js configured to allow images from `picsum.photos` (see next.config.ts)
 
 ### Path Aliases
-
 Use `@/*` alias for src imports:
-
 ```tsx
 import { Button } from '@/components/UI/Button'
 import '@/styles/globals.scss'
@@ -93,14 +79,12 @@ import '@/styles/globals.scss'
 ## Testing & Quality Assurance
 
 ### Vitest + Storybook Integration
-
 - Tests run via `@storybook/addon-vitest` plugin
 - Browser testing with Playwright (chromium)
 - Setup file: `.storybook/vitest.setup.ts`
 - A11y testing enabled with `addon-a11y` (status: 'todo')
 
 ### ESLint Configuration
-
 - Extends Next.js core-web-vitals + TypeScript config
 - Configured to ignore `.next/`, `out/`, `build/`, `next-env.d.ts`
 
