@@ -1,0 +1,105 @@
+@import url(./fonts/pretendard-gov/pretendard-gov.css);
+
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-foreground: #000;
+  --color-muted: #4b5563;
+  --color-border: #d1d5db;
+  --color-primary: #1d4ed8;
+  --color-success: #065f46;
+  --color-warning: #b45309;
+  --color-danger: #b91c1c;
+
+  --space-xs: 0.4rem;
+  --space-sm: 0.8rem;
+  --space-md: 1.6rem;
+  --space-lg: 2.4rem;
+  --radius-sm: 0.4rem;
+  --radius-md: 0.6rem;
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0b1220;
+    --color-surface: #071026;
+    --color-foreground: #e6eef8;
+    --color-muted: #94a3b8;
+    --color-border: #0f1724;
+  }
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+  font-weight: 700;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  color: rgba(29, 29, 29, 1);
+  font-size: 1.7rem;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: 'Pretendard GOV', 'Roboto', '-apple-system', 'Helvetica Neue',
+    Helvetica, Arial, sans-serif;
+  letter-spacing: normal;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: none;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

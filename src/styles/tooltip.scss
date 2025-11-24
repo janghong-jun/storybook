@@ -1,0 +1,48 @@
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.tooltip-layer {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.6rem;
+  padding: 0.6rem 1rem;
+  background-color: rgba(17, 24, 39, 0.95);
+  color: #fff;
+  font-size: 1.4rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  z-index: 100;
+  box-shadow: 0 0.6rem 1.2rem rgba(2, 6, 23, 0.3);
+  opacity: 0;
+  transform-origin: top center;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.tooltip-container:focus-within .tooltip-layer,
+.tooltip-container:hover .tooltip-layer {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@keyframes fadeIn2 {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,100 @@
+'use client'
+import React, { useState, useId } from 'react'
+
+export interface AccordionItem {
+  title: string
+  content: React.ReactNode
+}
+
+interface AccordionProps {
+  /**
+   * 아코디언에 표시할 아이템 배열
+   *
+   * ```jsx
+   * items = [
+   *   {
+   *     title: '첫 번째 항목',
+   *     content: <p>첫 번째 내용입니다.</p>
+   *   },
+   *   {
+   *     title: '두 번째 항목',
+   *     content: <p>두 번째 내용입니다.</p>
+   *   }
+   * ]
+   * ```
+   */
+  items: AccordionItem[]
+  /** 여러 항목을 동시에 열 수 있는지 여부 (기본: false) */
+  allowMultipleOpen?: boolean
+  /** 기본으로 열려있는 항목의 인덱스 (기본: 없음) */
+  defaultOpenIndex?: number
+  /** 커스텀 CSS 클래스 */
+  className?: string
+}
+
+/** Accordion UI 컴포넌트 */
+export const Accordion: React.FC<AccordionProps> = ({
+  items,
+  allowMultipleOpen = false,
+  defaultOpenIndex,
+  className,
+}) => {
+  const [openIndexes, setOpenIndexes] = useState<number[]>(
+    defaultOpenIndex !== undefined ? [defaultOpenIndex] : []
+  )
+  const accordionId = useId()
+
+  const toggleIndex = (index: number) => {
+    if (openIndexes.includes(index)) {
+      setOpenIndexes(openIndexes.filter((i) => i !== index))
+    } else {
+      setOpenIndexes(allowMultipleOpen ? [...openIndexes, index] : [index])
+    }
+  }
+
+  return (
+    <div
+      className={`accordion${className ? ` ${className}` : ''}`}
+      role="presentation"
+    >
+      {items.map((item, idx) => {
+        const headerId = `accordion_header_${accordionId}_${idx}`
+        const contentId = `accordion_content_${accordionId}_${idx}`
+        const isOpen = openIndexes.includes(idx)
+
+        return (
+          <div key={idx} className={`accordion-item${isOpen ? ' active' : ''}`}>
+            <strong className="accordion-header">
+              <button
+                type="button"
+                id={headerId}
+                className="accordion-trigger"
+                aria-expanded={isOpen}
+                aria-controls={contentId}
+                onClick={() => toggleIndex(idx)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    toggleIndex(idx)
+                  }
+                }}
+              >
+                {item.title}
+              </button>
+            </strong>
+
+            <div
+              id={contentId}
+              role="region"
+              aria-labelledby={headerId}
+              className="accordion-content"
+              {...(!isOpen ? { inert: true } : {})} // 지원 브라우저에 inert 적용
+            >
+              {item.content}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
