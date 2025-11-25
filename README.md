@@ -49,8 +49,8 @@ npm install
 
 | 명령어                    | 설명                                    |
 | ------------------------- | --------------------------------------- |
-| `npm run d`               | Next.js 개발 서버 시작 (localhost:3000) |
-| `npm run s`               | Storybook 시작 (localhost:6006)         |
+| `npm run dev`             | Next.js 개발 서버 시작 (localhost:3000) |
+| `npm run storybook`       | Storybook 시작 (localhost:6006)         |
 | `npm run build`           | 프로덕션용 Next.js 앱 빌드              |
 | `npm run build-storybook` | 정적 Storybook 출력 빌드                |
 | `npm run lint`            | ESLint 실행                             |
@@ -60,7 +60,7 @@ npm install
 **옵션 1: Storybook (컴포넌트 개발에 권장)**
 
 ```bash
-npm run s
+npm run storybook
 ```
 
 [http://localhost:6006](http://localhost:6006)을 열어 컴포넌트 스토리 및 문서화를 확인합니다.
@@ -68,7 +68,7 @@ npm run s
 **옵션 2: Next.js 앱**
 
 ```bash
-npm run d
+npm run dev
 ```
 
 [http://localhost:3000](http://localhost:3000)을 열어 메인 애플리케이션을 확인합니다.
