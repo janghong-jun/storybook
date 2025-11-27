@@ -72,19 +72,16 @@ export const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <nav className="pagination" aria-label="페이지 이동">
+      <button
+        type="button"
+        className="pagination__button prev"
+        onClick={() => handlePageChange((currentPage || 1) - 1)}
+        disabled={isPrevDisabled}
+        aria-label="이전 페이지"
+      >
+        ‹
+      </button>
       <ul className="pagination__list">
-        <li>
-          <button
-            type="button"
-            className="pagination__button"
-            onClick={() => handlePageChange((currentPage || 1) - 1)}
-            disabled={isPrevDisabled} // ← 여기
-            aria-label="이전 페이지"
-          >
-            이전
-          </button>
-        </li>
-
         {pages.map((page, idx) =>
           page === '...' ? (
             <li key={`ellipsis-${idx}`} className="pagination__ellipsis">
@@ -105,19 +102,16 @@ export const Pagination: React.FC<PaginationProps> = ({
             </li>
           )
         )}
-
-        <li>
-          <button
-            type="button"
-            className="pagination__button"
-            onClick={() => handlePageChange((currentPage || 1) + 1)}
-            disabled={isNextDisabled}
-            aria-label="다음 페이지"
-          >
-            다음
-          </button>
-        </li>
       </ul>
+      <button
+        type="button"
+        className="pagination__button next"
+        onClick={() => handlePageChange((currentPage || 1) + 1)}
+        disabled={isNextDisabled}
+        aria-label="다음 페이지"
+      >
+        ›
+      </button>
     </nav>
   )
 }

@@ -3,31 +3,56 @@ import Link from 'next/link'
 export default function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-inner">
-        <div className="footer-brand">
-          <span className="footer-logo" aria-hidden>
-            🌐
-          </span>
-          <span className="footer-title">ModernSite</span>
+      <div className="container">
+        <div className="footer-content">
+          <div className="footer-brand">
+            <h3>Modern Design</h3>
+            <p>심플하고 아름다운 웹 디자인</p>
+          </div>
+          <div className="footer-links">
+            <div className="footer-section">
+              <h4>서비스</h4>
+              <ul>
+                <li>
+                  <Link href="#">디자인</Link>
+                </li>
+                <li>
+                  <Link href="#">개발</Link>
+                </li>
+                <li>
+                  <Link href="#">컨설팅</Link>
+                </li>
+              </ul>
+            </div>
+            <div className="footer-section">
+              <h4>회사</h4>
+              <ul>
+                <li>
+                  <Link href="#">소개</Link>
+                </li>
+                <li>
+                  <Link href="#">블로그</Link>
+                </li>
+                <li>
+                  <Link href="#">연락처</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <nav className="footer-links" aria-label="하단 링크">
-          <Link href="#privacy">개인정보처리방침</Link>
-          <Link href="#terms">이용약관</Link>
-          <Link href="#contact">문의</Link>
-        </nav>
-        <div className="footer-social">
-          <Link href="#" aria-label="Twitter" className="footer-social-icon">
-            🐦
-          </Link>
-          <Link href="#3" aria-label="Facebook" className="footer-social-icon">
-            📘
-          </Link>
-          <Link href="#" aria-label="Github" className="footer-social-icon">
-            💻
-          </Link>
-        </div>
-        <div className="footer-copy">
-          © 2025 ModernSite. All Rights Reserved.
+        <div className="footer-bottom">
+          <p>&copy; 2024 Modern Design. All rights reserved.</p>
+          <div className="footer-social">
+            <a href="#" aria-label="Twitter" target="_blank">
+              𝕏
+            </a>
+            <a href="#" aria-label="GitHub" target="_blank">
+              🐙
+            </a>
+            <a href="#" aria-label="LinkedIn" target="_blank">
+              💼
+            </a>
+          </div>
         </div>
       </div>
     </footer>

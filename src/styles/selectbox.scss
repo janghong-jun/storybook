@@ -10,17 +10,17 @@
 }
 
 .selectbox-button {
+  position: relative;
   width: 100%;
   padding: var(--space-md) var(--space-xl);
+  border: 0.1rem solid rgba(15, 23, 42, 0.1);
+  border-radius: var(--radius-xl);
   font-size: var(--text-base);
   text-align: left;
-  border-radius: var(--radius-xl);
-  border: 0.1rem solid rgba(15, 23, 42, 0.1);
-  background: rgba(248, 250, 255, 0.9);
   color: var(--color-foreground);
-  cursor: pointer;
+  background: rgba(248, 250, 255, 0.9);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  position: relative;
+  cursor: pointer;
 
   &.placeholder {
     color: var(--color-text-tertiary);
@@ -31,8 +31,7 @@
   }
 
   // 포커스시 시각적 아웃라인 통일
-  &:focus-visible {
-    outline: none;
+  &:focus {
     border-color: rgba(99, 102, 241, 0.5);
     box-shadow: 0 0 0 0.4rem rgba(99, 102, 241, 0.15); // 통일된 사이즈
     background: #fff;
@@ -55,6 +54,9 @@
 
   &.open {
     box-shadow: 0 0 0 0.4rem rgba(99, 102, 241, 0.15);
+    outline: 0.2rem solid var(--color-primary);
+    outline-offset: 0.2rem;
+    transition: all 0.2s ease;
 
     &::after {
       transform: translateY(-50%) rotate(-135deg);
@@ -101,12 +103,9 @@
   }
 
   // 포커스시 시각적 아웃라인 통일
-  &:focus-visible {
-    outline: none;
-    background: rgba(99, 102, 241, 0.12);
-    color: var(--color-primary);
-    border-radius: var(--radius-xl);
-    box-shadow: 0 0 0 0.4rem rgba(99, 102, 241, 0.15);
+  &:focus {
+    background: rgba(99, 102, 241, 0.08);
+    outline-offset: -0.4rem;
   }
 }
 
@@ -132,8 +131,7 @@
   cursor: pointer;
 
   // 포커스시 시각적 아웃라인 통일
-  &:focus-visible {
-    outline: none;
+  &:focus {
     border-color: rgba(99, 102, 241, 0.5);
     box-shadow: 0 0 0 0.4rem rgba(99, 102, 241, 0.15); // 통일된 사이즈
     background: #fff;

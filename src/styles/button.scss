@@ -1,34 +1,34 @@
 .btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
   padding: var(--space-md) var(--space-xl);
+  border: 0.1rem solid transparent;
+  border-radius: var(--radius-lg);
   font-size: 1.4rem;
   font-weight: var(--font-weight-semibold);
-  border-radius: var(--radius-lg);
-  border: 0.1rem solid transparent;
-  cursor: pointer;
   color: var(--color-foreground);
   background: linear-gradient(120deg, #f9fafb, #ecf2ff);
   box-shadow: 0 0.2rem 0.4rem rgba(15, 23, 42, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease,
     color 0.2s ease;
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
+  cursor: pointer;
 
   // 빛나는 효과가 천천히 도는 듯한 after (기본)
   &::after {
-    content: '';
     position: absolute;
     inset: -16%;
     z-index: 1;
-    pointer-events: none;
+    content: '';
     border-radius: inherit;
     opacity: 0; // 기본은 안보이게
-    filter: blur(7px) brightness(1.09);
+    pointer-events: none;
     animation: btn-glow-spin 2s linear infinite;
+    filter: blur(0.7rem) brightness(1.09);
     mix-blend-mode: lighten;
     transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -39,27 +39,26 @@
 
     &:hover::after {
       opacity: 1;
-      filter: blur(10px) brightness(1.17);
+      filter: blur(1rem) brightness(1.17);
     }
   }
 
-  &:focus-visible {
-    outline: none;
+  &:focus {
     box-shadow: 0 0 0 0.4rem rgba(59, 130, 246, 0.18), var(--shadow-md);
     &:hover::after {
       opacity: 1;
-      filter: blur(12px) brightness(1.18);
+      filter: blur(1.2rem) brightness(1.18);
     }
   }
 
   &:disabled {
     opacity: 0.45;
-    cursor: not-allowed;
+    cursor: default;
     transform: none;
     box-shadow: none;
     &:hover::after {
       opacity: 0.25;
-      filter: blur(3px);
+      filter: blur(0.3rem);
       animation-play-state: paused;
     }
   }
@@ -88,7 +87,7 @@
         rgba(99, 102, 241, 0.35) 360deg
       );
       opacity: 1;
-      filter: blur(10px) brightness(1.16);
+      filter: blur(1rem) brightness(1.16);
     }
   }
 
@@ -113,7 +112,7 @@
         rgba(99, 102, 241, 0.85) 360deg
       );
       opacity: 1;
-      filter: blur(18px) brightness(1.32) saturate(1.8) contrast(1.35);
+      filter: blur(1.8rem) brightness(1.32) saturate(1.8) contrast(1.35);
     }
   }
 
@@ -133,7 +132,7 @@
         rgba(244, 63, 94, 0.22) 360deg
       );
       opacity: 1;
-      filter: blur(10px) brightness(1.15);
+      filter: blur(1rem) brightness(1.15);
     }
   }
 
@@ -172,81 +171,7 @@
   }
 }
 
-// GHOST
-.btn-ghost {
-  background: transparent;
-  border-color: rgba(15, 23, 42, 0.12);
-
-  &::after {
-    background: conic-gradient(
-      from 0deg,
-      rgba(99, 102, 241, 0.1) 0deg,
-      rgba(59, 130, 246, 0.07) 60deg,
-      rgba(16, 185, 129, 0.1) 120deg,
-      rgba(251, 191, 36, 0.1) 200deg,
-      rgba(236, 72, 153, 0.1) 320deg,
-      rgba(99, 102, 241, 0.1) 360deg
-    );
-    opacity: 0.9;
-    filter: blur(5px) brightness(1.07);
-  }
-
-  &:hover:not(:disabled) {
-    background: rgba(99, 102, 241, 0.08);
-
-    &:hover::after {
-      opacity: 1;
-      filter: blur(8px) brightness(1.09);
-    }
-  }
-}
-
-// btn-primary, btn-secondary 에서도 빛나는 효과 명확히(지정)
-.btn-primary {
-  background: linear-gradient(120deg, #4f46e5, #7c3aed);
-  color: #fff;
-
-  &::after {
-    background: conic-gradient(
-      from 0deg,
-      rgba(99, 102, 241, 0.23) 0deg,
-      rgba(59, 130, 246, 0.33) 60deg,
-      rgba(244, 63, 94, 0.19) 120deg,
-      rgba(236, 72, 153, 0.2) 200deg,
-      rgba(99, 102, 241, 0.33) 320deg,
-      rgba(99, 102, 241, 0.23) 360deg
-    );
-    opacity: 1;
-    filter: blur(11px) brightness(1.19);
-  }
-}
-
-.btn-secondary {
-  background: #ffffff;
-  border-color: rgba(15, 23, 42, 0.12);
-
-  &::after {
-    background: conic-gradient(
-      from 0deg,
-      rgba(165, 180, 252, 0.7) 0deg,
-      rgba(99, 102, 241, 0.82) 40deg,
-      rgba(16, 185, 129, 0.7) 110deg,
-      rgba(251, 191, 36, 0.83) 180deg,
-      rgba(59, 130, 246, 0.82) 260deg,
-      rgba(236, 72, 153, 0.8) 320deg,
-      rgba(165, 180, 252, 0.7) 360deg
-    );
-    opacity: 1;
-    filter: blur(22px) brightness(1.49) saturate(2.2) contrast(1.6);
-  }
-}
-
-.btn-lg {
-  padding: var(--space-lg) var(--space-2xl);
-  font-size: var(--text-lg);
-}
-
-@media (max-width: 48rem) {
+@media (max-width: 768px) {
   .btn {
     width: 100%;
   }

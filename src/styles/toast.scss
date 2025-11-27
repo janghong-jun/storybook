@@ -2,18 +2,18 @@
   position: fixed;
   left: 50%;
   bottom: var(--space-2xl);
-  transform: translate(-50%, 1.2rem);
   min-width: 24rem;
   max-width: min(42rem, calc(100vw - var(--space-xl)));
   padding: var(--space-md) var(--space-xl);
   border-radius: var(--radius-xl);
-  background: rgba(15, 23, 42, 0.9);
-  color: #fff;
   font-size: var(--text-base);
+  color: #fff;
+  background: rgba(15, 23, 42, 0.9);
   box-shadow: 0 1.8rem 3rem rgba(15, 23, 42, 0.35);
+  transform: translate(-50%, 1.2rem);
+  animation: toastIn 0.35s ease forwards;
   opacity: 0;
   pointer-events: none;
-  animation: toastIn 0.35s ease forwards;
 
   &.toast-success {
     background: linear-gradient(120deg, #16a34a, #22c55e);

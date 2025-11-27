@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   background-color: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(0.8rem);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,8 +32,7 @@
     pointer-events: none;
   }
 
-  &:focus-visible {
-    outline: none;
+  &:focus {
     box-shadow: 0 0 0 0.4rem rgba(99, 102, 241, 0.2),
       0 2rem 4rem rgba(15, 23, 42, 0.25);
   }

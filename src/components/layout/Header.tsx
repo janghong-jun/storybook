@@ -1,7 +1,7 @@
 'use client'
 import React, { useRef } from 'react'
 import Link from 'next/link'
-import GNB from './GNB'
+import GNB from '@/components/layout/GNB'
 
 export default function Header() {
   const headerRef = useRef<HTMLElement | null>(null)

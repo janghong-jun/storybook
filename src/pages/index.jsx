@@ -37,10 +37,10 @@ export default function Main() {
               모든 디바이스에서 완벽한 경험을 제공합니다.
             </p>
             <div className="hero-actions">
-              <button type="button" className="btn btn-primary btn-lg">
+              <button type="button" className="btn primary large">
                 시작하기
               </button>
-              <button type="button" className="btn btn-secondary btn-lg">
+              <button type="button" className="btn secondary large">
                 자세히 보기
               </button>
             </div>
@@ -159,10 +159,10 @@ export default function Main() {
               심플하고 아름다운 디자인으로 프로젝트의 완성도를 높여보세요.
             </p>
             <div className="cta-actions">
-              <button type="button" className="btn btn-primary btn-lg">
+              <button type="button" className="btn primary large">
                 프로젝트 시작하기
               </button>
-              <button type="button" className="btn btn-ghost btn-lg">
+              <button type="button" className="btn ghost large">
                 문의하기
               </button>
             </div>
@@ -183,62 +183,6 @@ export default function Main() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-content">
-            <div className="footer-brand">
-              <h3>Modern Design</h3>
-              <p>심플하고 아름다운 웹 디자인</p>
-            </div>
-            <div className="footer-links">
-              <div className="footer-section">
-                <h4>서비스</h4>
-                <ul>
-                  <li>
-                    <a href="#">디자인</a>
-                  </li>
-                  <li>
-                    <a href="#">개발</a>
-                  </li>
-                  <li>
-                    <a href="#">컨설팅</a>
-                  </li>
-                </ul>
-              </div>
-              <div className="footer-section">
-                <h4>회사</h4>
-                <ul>
-                  <li>
-                    <a href="#">소개</a>
-                  </li>
-                  <li>
-                    <a href="#">블로그</a>
-                  </li>
-                  <li>
-                    <a href="#">연락처</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>&copy; 2024 Modern Design. All rights reserved.</p>
-            <div className="footer-social">
-              <a href="#" aria-label="Twitter">
-                𝕏
-              </a>
-              <a href="#" aria-label="GitHub">
-                🐙
-              </a>
-              <a href="#" aria-label="LinkedIn">
-                💼
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

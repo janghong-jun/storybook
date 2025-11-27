@@ -1,8 +1,8 @@
 import { ReactNode, useState, useEffect } from 'react'
 import Head from 'next/head'
-import SkipToContent from '../common/SkipToContent'
-import Header from './Header'
-import Footer from './Footer'
+import SkipToContent from '@/components/common/SkipToContent'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
 
 interface LayoutProps {
   children: ReactNode

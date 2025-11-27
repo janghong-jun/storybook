@@ -6,21 +6,20 @@
 }
 
 .tooltip-trigger {
-  background: rgba(99, 102, 241, 0.12);
+  padding: var(--space-xs) var(--space-sm);
   border: none;
   border-radius: var(--radius-md);
-  padding: var(--space-xs) var(--space-sm);
-  cursor: pointer;
   color: var(--color-foreground);
+  background: rgba(99, 102, 241, 0.12);
   transition: background 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     background: rgba(99, 102, 241, 0.2);
     transform: translateY(-0.1rem);
   }
 
-  &:focus-visible {
-    outline: none;
+  &:focus {
     box-shadow: 0 0 0 0.3rem rgba(99, 102, 241, 0.2);
   }
 }
@@ -53,19 +52,19 @@
   top: 100%;
   left: 50%;
   z-index: 1;
-  transform: translate(-50%, 0.5rem);
   margin-top: var(--space-xs);
   padding: var(--space-sm) var(--space-md);
   min-width: max-content;
-  background: var(--color-foreground);
-  color: var(--color-surface);
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
   line-height: 1.4;
+  color: var(--color-surface);
+  background: var(--color-foreground);
   box-shadow: var(--shadow-xl);
+  transition: opacity 0.2s ease, transform 0.2s ease;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translate(-50%, 0.5rem);
 
   &::after {
     content: '';

@@ -16,8 +16,8 @@
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-xl);
   border: 0.1rem solid rgba(15, 23, 42, 0.1);
+  border-radius: var(--radius-xl);
   background: rgba(248, 250, 255, 0.9);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 
@@ -28,20 +28,20 @@
 }
 
 .rdo-item input[type='radio'] {
-  appearance: none;
+  position: relative;
   width: 1.8rem;
   height: 1.8rem;
-  border-radius: 50%;
+  appearance: none;
   border: 0.2rem solid rgba(99, 102, 241, 0.25);
+  border-radius: 50%;
   background: #fff;
-  position: relative;
   transition: border-color 0.2s ease;
 }
 
 .rdo-item input[type='radio']::after {
-  content: '';
   position: absolute;
   inset: 0.2rem;
+  content: '';
   border-radius: 50%;
   background: linear-gradient(120deg, #4f46e5, #7c3aed);
   transform: scale(0);
@@ -57,12 +57,11 @@
 }
 
 .rdo-item input[type='radio']:disabled {
-  cursor: not-allowed;
+  cursor: default;
   opacity: 0.5;
 }
 
-.rdo-item input[type='radio']:focus-visible {
-  outline: none;
+.rdo-item input[type='radio']:focus {
   box-shadow: 0 0 0 0.3rem rgba(99, 102, 241, 0.25);
 }
 
@@ -77,6 +76,6 @@
 }
 
 .rdo-item input[type='radio']:disabled + label {
-  cursor: not-allowed;
+  cursor: default;
   color: var(--color-text-tertiary);
 }

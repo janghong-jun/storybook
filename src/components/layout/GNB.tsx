@@ -138,9 +138,9 @@ const GNB: React.FC<GNBProps> = ({ containerRef }) => {
                 className="menu-toggle"
                 aria-haspopup="true"
                 aria-expanded={isOpen}
-                onClick={() =>
+                onClick={() => {
                   setOpenIndex((prev) => (prev === idx ? null : idx))
-                }
+                }}
               >
                 {item.label}
               </button>
@@ -149,6 +149,7 @@ const GNB: React.FC<GNBProps> = ({ containerRef }) => {
                 href={item.href ?? '#'}
                 onClick={() => {
                   setMobileOpen(false)
+                  document.body.scrollTo({ top: 0 })
                 }}
               >
                 {item.label}

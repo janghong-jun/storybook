@@ -54,6 +54,7 @@ a {
   margin: 0 auto;
   text-align: center;
   background: var(--color-primary);
+  transition: all 0.2s ease;
 }
 .header {
   position: fixed;
@@ -69,7 +70,7 @@ a {
   padding: var(--space-md) var(--space-lg);
   box-shadow: var(--shadow-sm);
   border-bottom: 0.1rem solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(1rem);
 }
 
 body {
@@ -78,7 +79,6 @@ body {
   .main {
     padding: var(--space-xl);
     padding-top: calc(7.2rem + var(--space-xl));
-    font-family: var(--font-sans);
     line-height: var(--line-height-relaxed);
     background: var(--color-bg);
     min-height: 100vh;
@@ -108,12 +108,6 @@ body {
     padding: var(--space-xl) 0 var(--space-lg) 0;
     font-size: var(--text-base);
     letter-spacing: var(--letter-spacing-normal);
-
-    // pages.scss에서 사용되는 스타일 변형
-    &.footer-dark {
-      background: var(--color-foreground);
-      padding: var(--space-3xl) 0 var(--space-xl) 0;
-    }
   }
   .footer-inner {
     max-width: 120rem;
@@ -161,7 +155,7 @@ body {
     font-weight: 600;
     color: inherit;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
   }
   .logo a:hover,
   .logo a:focus {
@@ -188,18 +182,6 @@ body {
       &:hover,
       &:focus {
         color: var(--color-info);
-      }
-    }
-
-    // pages.scss에서 사용되는 grid 레이아웃 변형
-    &.footer-links-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-      gap: var(--space-xl);
-      margin: 0;
-
-      @media (min-width: 64rem) {
-        grid-template-columns: repeat(2, 1fr);
       }
     }
   }
@@ -244,7 +226,7 @@ body {
     gap: var(--space-2xl);
     margin-bottom: var(--space-2xl);
 
-    @media (min-width: 48rem) {
+    @media (min-width: 768px) {
       grid-template-columns: 2fr 3fr;
     }
   }

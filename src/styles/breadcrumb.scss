@@ -3,12 +3,12 @@
   padding: 0;
 
   &-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     margin: 0;
     padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   &-item {
@@ -33,9 +33,9 @@
 
       .breadcrumb-link {
         display: flex;
-        text-decoration: none;
         align-items: center;
         gap: var(--space-xs);
+        text-decoration: none;
 
         span {
           text-decoration: underline;
@@ -48,6 +48,7 @@
           }
           outline: 0.2rem solid var(--color-primary);
           outline-offset: 0.2rem;
+          transition: all 0.2s ease;
         }
 
         &::before {
@@ -63,11 +64,11 @@
 
     .breadcrumb-link {
       padding: 0 var(--space-xs);
+      border-radius: var(--radius-sm);
       font-size: var(--text-base);
       color: var(--color-foreground);
       text-decoration: underline;
       text-underline-offset: 0.3rem;
-      border-radius: var(--radius-sm);
       transition: background-color 0.2s ease;
 
       &:hover {

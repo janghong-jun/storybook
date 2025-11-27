@@ -52,19 +52,45 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
   const listRef = useRef<HTMLUListElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
+  // Sync selected value with controlled value
   useEffect(() => {
     setSelected(value)
   }, [value])
 
+  // Close menu on click outside or focus leaving the component
   useEffect(() => {
+    if (!isOpen) return
+    const container = containerRef.current
     const handleClick = (e: MouseEvent) => {
-      if (!containerRef.current?.contains(e.target as Node)) {
+      if (!container?.contains(e.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+    const handleFocusOut = (e: FocusEvent) => {
+      // Close if focus moves outside of container
+      if (!container?.contains(e.relatedTarget as Node)) {
         setIsOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClick)
-    return () => document.removeEventListener('mousedown', handleClick)
-  }, [])
+    container?.addEventListener('focusout', handleFocusOut as EventListener)
+    return () => {
+      document.removeEventListener('mousedown', handleClick)
+      container?.removeEventListener(
+        'focusout',
+        handleFocusOut as EventListener
+      )
+    }
+  }, [isOpen])
+
+  // Focus the option when opening
+  useEffect(() => {
+    if (isOpen && listRef.current && highlightIndex >= 0) {
+      const optionNodes =
+        listRef.current.querySelectorAll<HTMLLIElement>('li[role="option"]')
+      optionNodes[highlightIndex]?.focus()
+    }
+  }, [isOpen, highlightIndex])
 
   const handleSelect = (val: string | number) => {
     setSelected(val)
@@ -82,6 +108,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
 
   const closeMenu = () => setIsOpen(false)
 
+  // Button keydown handler (open menu and keyboard navigation for button)
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (disabled) return
 
@@ -96,23 +123,39 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
 
       case 'ArrowDown':
         e.preventDefault()
-        if (!isOpen) openMenu()
-        else setHighlightIndex((prev) => Math.min(prev + 1, options.length - 1))
+        if (!isOpen) {
+          openMenu()
+        } else {
+          setHighlightIndex((prev) => {
+            const next = Math.min(prev + 1, options.length - 1)
+            return next
+          })
+        }
         break
 
       case 'ArrowUp':
         e.preventDefault()
-        if (isOpen) setHighlightIndex((prev) => Math.max(prev - 1, 0))
+        if (!isOpen) {
+          openMenu()
+        } else {
+          setHighlightIndex((prev) => Math.max(prev - 1, 0))
+        }
         break
 
       case 'Escape':
         closeMenu()
         break
+
+      case 'Tab':
+        closeMenu()
+        break
     }
   }
 
+  // Option keydown: handle arrow navigation & selection
   const handleOptionKey = (
     e: React.KeyboardEvent<HTMLLIElement>,
+    idx: number,
     opt: SelectOption
   ) => {
     switch (e.key) {
@@ -121,7 +164,35 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
         e.preventDefault()
         handleSelect(opt.value)
         break
+      case 'ArrowDown': {
+        e.preventDefault()
+        const nextIdx = Math.min(idx + 1, options.length - 1)
+        setHighlightIndex(nextIdx)
+        const list = listRef.current
+        if (list) {
+          const optionNodes =
+            list.querySelectorAll<HTMLLIElement>('li[role="option"]')
+          optionNodes[nextIdx]?.focus()
+        }
+        break
+      }
+      case 'ArrowUp': {
+        e.preventDefault()
+        const prevIdx = Math.max(idx - 1, 0)
+        setHighlightIndex(prevIdx)
+        const list = listRef.current
+        if (list) {
+          const optionNodes =
+            list.querySelectorAll<HTMLLIElement>('li[role="option"]')
+          optionNodes[prevIdx]?.focus()
+        }
+        break
+      }
       case 'Escape':
+        closeMenu()
+        buttonRef.current?.focus()
+        break
+      case 'Tab':
         closeMenu()
         break
     }
@@ -163,6 +234,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
       className={`selectbox-wrapper${disabled ? ' disabled' : ''}${
         className ? ` ${className}` : ''
       }`}
+      tabIndex={-1}
     >
       <button
         type="button"
@@ -173,8 +245,10 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
         disabled={disabled}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
+        aria-controls={isOpen ? 'selectbox-listbox' : undefined}
         onKeyDown={handleKeyDown}
         onClick={() => (isOpen ? closeMenu() : openMenu())}
+        tabIndex={0}
       >
         {selected
           ? options.find((o) => o.value === selected)?.label
@@ -182,20 +256,37 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
       </button>
 
       {isOpen && (
-        <ul ref={listRef} role="listbox" className="selectbox-options">
+        <ul
+          ref={listRef}
+          id="selectbox-listbox"
+          role="listbox"
+          className="selectbox-options"
+          tabIndex={-1}
+          aria-activedescendant={
+            highlightIndex >= 0
+              ? `option-${options[highlightIndex]?.value}`
+              : undefined
+          }
+        >
           {options.map((opt, i) => (
             <li
               key={opt.value}
-              tabIndex={0}
+              id={`option-${opt.value}`}
+              tabIndex={-1}
               role="option"
               aria-selected={selected === opt.value}
-              className={`
-                selectbox-option
-                ${selected === opt.value ? 'selected' : ''}
-                ${highlightIndex === i ? 'highlight' : ''}
-              `}
-              onKeyDown={(e) => handleOptionKey(e, opt)}
+              className={[
+                'selectbox-option',
+                selected === opt.value ? 'selected' : '',
+                highlightIndex === i ? 'highlight' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+              onKeyDown={(e) => handleOptionKey(e, i, opt)}
               onClick={() => handleSelect(opt.value)}
+              onMouseEnter={() => setHighlightIndex(i)}
+              // For keyboard a11y: option gets focus only when navigating
+              // Listbox ul grabs focus on open, options grab focus on Arrow nav
             >
               {opt.label}
             </li>

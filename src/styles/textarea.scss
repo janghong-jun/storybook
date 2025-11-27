@@ -23,6 +23,9 @@
       border-color: rgba(79, 70, 229, 0.5);
       box-shadow: 0 0 0 0.4rem rgba(99, 102, 241, 0.15);
       background: #fff;
+      outline: 0.2rem solid var(--color-primary);
+      outline-offset: 0.2rem;
+      transition: all 0.2s ease;
     }
     &.has-error {
       border-color: rgba(239, 68, 68, 0.5);
@@ -36,11 +39,10 @@
     padding: var(--space-md) calc(var(--space-xl) + 2rem) var(--space-xl)
       var(--space-xl);
     border: none;
-    background: transparent;
     font-size: var(--text-base);
-    font-family: var(--font-sans);
     line-height: 1.6;
     color: var(--color-foreground);
+    background: transparent;
     resize: none;
 
     &::placeholder {
@@ -79,8 +81,7 @@
       color: var(--color-primary);
     }
 
-    &:focus-visible {
-      outline: none;
+    &:focus {
       box-shadow: 0 0 0 0.3rem rgba(99, 102, 241, 0.2);
     }
   }

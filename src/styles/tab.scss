@@ -33,11 +33,10 @@
 
     &:disabled {
       opacity: 0.4;
-      cursor: not-allowed;
+      cursor: default;
     }
 
-    &:focus-visible {
-      outline: none;
+    &:focus {
       box-shadow: 0 0 0 0.35rem rgba(99, 102, 241, 0.2);
     }
   }
