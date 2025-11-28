@@ -1,0 +1,1 @@
+import{c as m,d as t,r as e}from"./iframe-B7ALOmHm.js";import"./preload-helper-PPVm8Dsz.js";import"./datepicker-Dz1Ef8Gs.js";import"./react-Cl_xvQ9m.js";import"./vendors-kYdpP6Vl.js";var o=m(e(),1),_=(0,o.default)(2)(async(i,r)=>i===!1?r:t(r));export{_ as formatter};
