@@ -1,4 +1,3 @@
-'use client'
 import React, { useState, useRef, useEffect, useId } from 'react'
 
 export interface TooltipProps {

@@ -1,4 +1,3 @@
-'use client'
 import React, { useRef, useId, useEffect } from 'react'
 
 export interface ModalProps {

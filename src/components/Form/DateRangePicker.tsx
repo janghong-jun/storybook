@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState, forwardRef, useMemo, useEffect } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import { ko } from 'date-fns/locale'

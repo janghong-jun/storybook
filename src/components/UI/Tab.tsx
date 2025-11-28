@@ -1,4 +1,3 @@
-'use client'
 import React, { useState, useId, useRef, useEffect } from 'react'
 
 export interface TabItem {

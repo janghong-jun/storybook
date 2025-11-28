@@ -1,4 +1,3 @@
-'use client'
 import React, { useRef } from 'react'
 import Link from 'next/link'
 import GNB from '@/components/layout/GNB'

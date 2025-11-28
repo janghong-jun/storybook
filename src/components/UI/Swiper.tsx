@@ -1,4 +1,3 @@
-'use client'
 import React, { useState, useRef, useEffect, useId } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperType } from 'swiper' // ✅ 타입 import 추가
