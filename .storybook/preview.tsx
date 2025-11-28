@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { DocsContainer, DocsContextProps } from '@storybook/addon-docs/blocks'
 import type { Preview } from '@storybook/nextjs-vite'
 import '@/styles/globals.scss'
@@ -25,6 +25,20 @@ const preview: Preview = {
             'SelectBox',
           ],
           'UI',
+          [
+            'Accordion',
+            'Breadcrumb',
+            'Button',
+            'Divider',
+            'Modal',
+            'Pagination',
+            'Swiper',
+            'SystemAlert',
+            'Tab',
+            'Table',
+            'Toast',
+            'Tooltip',
+          ],
         ],
       },
     },

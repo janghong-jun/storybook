@@ -14,6 +14,7 @@ import {
   TextArea,
   SelectBox,
   DateRangePicker,
+  Table,
 } from '@/components/UI'
 import { useState } from 'react'
 import { useViewport } from '@/contexts/viewPortContext'
@@ -249,6 +250,165 @@ export default function DemoPage() {
             new Date(2025, 10, 3), // 개천절 (10월 3일)
             new Date(2025, 10, 9), // 한글날 (10월 9일)
             new Date(2025, 12, 25), // 크리스마스 (12월 25일)
+          ]}
+        />
+      </section>
+      {/* 테이블 컴포넌트 테스트 */}
+      <section className={styles.section}>
+        <h3>테이블 컴포넌트</h3>
+
+        <h4>가로형 테이블</h4>
+        <Table
+          type="horizontal"
+          headData={[
+            [
+              { content: '이름', isHeader: true },
+              { content: '나이', isHeader: true },
+              { content: '직업', isHeader: true },
+              { content: '지역', isHeader: true },
+            ],
+          ]}
+          bodyData={[
+            [
+              { content: '김철수' },
+              { content: '25' },
+              { content: '개발자' },
+              { content: '서울' },
+            ],
+            [
+              { content: '이영희' },
+              { content: '30' },
+              { content: '디자이너' },
+              { content: '부산' },
+            ],
+            [
+              { content: '박민수' },
+              { content: '28' },
+              { content: '마케터' },
+              { content: '대구' },
+            ],
+          ]}
+        />
+
+        <h4>세로형 테이블</h4>
+        <Table
+          type="vertical"
+          bodyData={[
+            [{ content: '이름' }, { content: '김철수' }],
+            [{ content: '나이' }, { content: '25세' }],
+            [{ content: '직업' }, { content: '프론트엔드 개발자' }],
+            [{ content: '경력' }, { content: '3년' }],
+          ]}
+        />
+
+        <h4>텍스트 정렬 예시</h4>
+        <Table
+          type="horizontal"
+          headData={[
+            [
+              { content: '왼쪽 정렬', isHeader: true },
+              { content: '가운데 정렬', isHeader: true },
+              { content: '오른쪽 정렬', isHeader: true },
+              { content: '기본', isHeader: true },
+            ],
+          ]}
+          bodyData={[
+            [
+              {
+                content: '왼쪽으로 정렬된 긴 텍스트입니다',
+                className: 'align-left',
+              },
+              { content: '가운데 정렬', className: 'align-center' },
+              { content: '₩999,999', className: 'align-right' },
+              { content: '기본 가운데' },
+            ],
+            [
+              { content: '짧은 텍스트', className: 'align-left' },
+              { content: '중앙', className: 'align-center' },
+              { content: '우측', className: 'align-right' },
+              { content: 'Default' },
+            ],
+          ]}
+        />
+
+        <h4>셀 병합이 포함된 테이블</h4>
+        <Table
+          type="horizontal"
+          headData={[
+            [
+              { content: '카테고리', isHeader: true },
+              { content: '제품명', isHeader: true },
+              { content: '가격', isHeader: true },
+              { content: '수량', isHeader: true },
+            ],
+          ]}
+          colWidths={['15%', '30%', '25%', '30%']}
+          bodyData={[
+            [
+              { content: '스마트폰', isHeader: true, rowSpan: 2 },
+              { content: '갤럭시 S24' },
+              { content: '₩1,200,000' },
+              { content: '50개' },
+            ],
+            [
+              { content: 'iPhone 15' },
+              { content: '₩1,500,000' },
+              { content: '30개' },
+            ],
+            [
+              { content: '노트북', isHeader: true, rowSpan: 2 },
+              { content: 'MacBook Air' },
+              { content: '₩1,800,000' },
+              { content: '20개' },
+            ],
+            [
+              { content: 'Surface Pro' },
+              { content: '₩2,000,000' },
+              { content: '15개' },
+            ],
+            [
+              { content: '합계', isHeader: true },
+              {
+                content: '₩5,300,000',
+                isHeader: true,
+                colSpan: 2,
+                className: 'align-right',
+              },
+              { content: '115개', isHeader: true },
+            ],
+          ]}
+        />
+
+        <h4>다중 행 헤더 테이블</h4>
+        <Table
+          type="horizontal"
+          headData={[
+            [
+              { content: '시간', isHeader: true, rowSpan: 2 },
+              { content: '월요일', isHeader: true, colSpan: 2 },
+              { content: '화요일', isHeader: true, colSpan: 2 },
+            ],
+            [
+              { content: '이론', isHeader: true },
+              { content: '실습', isHeader: true },
+              { content: '이론', isHeader: true },
+              { content: '실습', isHeader: true },
+            ],
+          ]}
+          bodyData={[
+            [
+              { content: '09:00-10:30', isHeader: true },
+              { content: '프론트엔드 기초' },
+              { content: 'HTML/CSS 실습' },
+              { content: '자바스크립트' },
+              { content: 'DOM 조작 실습' },
+            ],
+            [
+              { content: '10:45-12:15', isHeader: true },
+              { content: '반응형 디자인', colSpan: 2 },
+              { content: 'Node.js' },
+              { content: 'API 개발 실습' },
+            ],
           ]}
         />
       </section>

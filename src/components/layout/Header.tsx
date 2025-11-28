@@ -19,7 +19,7 @@ export default function Header() {
             window.dispatchEvent(event)
           }}
         >
-          우리시청
+          하이코칭
         </Link>
       </h1>
       <GNB containerRef={headerRef} />
