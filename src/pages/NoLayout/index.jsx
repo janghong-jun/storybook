@@ -19,8 +19,5 @@ export default function NoLayoutPage() {
   )
 }
 
-// 페이지 제목
 NoLayoutPage.pageTitle = 'none Layout'
-
-// 레이아웃 없이 그대로 렌더링
 NoLayoutPage.getLayout = (page) => page

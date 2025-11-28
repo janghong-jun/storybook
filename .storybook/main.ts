@@ -68,6 +68,7 @@ const config: StorybookConfig = {
       optimizeDeps: {
         include: ['lodash-es'],
         exclude: ['lodash'], // 충돌 방지
+        force: false,
       },
 
       ssr: {

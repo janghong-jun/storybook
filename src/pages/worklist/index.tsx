@@ -27,7 +27,7 @@ export default function Worklist() {
   return (
     <>
       <Head>
-        <title>Worklist</title>
+        <title>{Worklist.pageTitle}</title>
       </Head>
       <div className={styles.wrapper}>
         <h2 className={styles.title}>퍼블리싱 작업 리스트</h2>
@@ -116,4 +116,5 @@ export default function Worklist() {
   )
 }
 
+Worklist.pageTitle = '퍼블리싱 작업 리스트'
 Worklist.getLayout = (page: React.ReactNode) => page

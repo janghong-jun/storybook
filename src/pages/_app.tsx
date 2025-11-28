@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
 import type { ReactNode } from 'react'
 import { ViewportProvider } from '@/contexts/viewPortContext'
+import Head from 'next/head'
 import Layout from '@/components/layout/Layout'
 import '@/styles/globals.scss'
 import '@/styles/fonts/pretendard-gov.css'
@@ -28,6 +29,11 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <ViewportProvider>
+      <Head>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/images/favicon.ico" />
+      </Head>
       {getLayout(<Component {...pageProps} />, pageTitle)}
     </ViewportProvider>
   )

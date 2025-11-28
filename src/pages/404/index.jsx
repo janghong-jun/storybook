@@ -5,7 +5,7 @@ import { useViewport } from '@/contexts/viewPortContext'
 
 import styles from './404.module.scss'
 
-const NoLayoutPage = () => {
+export default function NotFoundPage() {
   const { viewport } = useViewport()
 
   const viewportClass =
@@ -126,7 +126,5 @@ const NoLayoutPage = () => {
     </>
   )
 }
-
-NoLayoutPage.getLayout = (page) => page
-
-export default NoLayoutPage
+NotFoundPage.getLayout = (page) => page
+NotFoundPage.pageTitle = '404 - 페이지를 찾을 수 없습니다'
