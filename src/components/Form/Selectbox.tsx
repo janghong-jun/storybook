@@ -32,6 +32,8 @@ export interface SelectBoxProps {
   className?: string
   /** custom 셀렉트박스 사용여부 */
   custom?: boolean
+  /** 접근성 및 시각적 label */
+  label?: string
 }
 
 /** SelectBox UI 컴포넌트 */
@@ -43,6 +45,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
   disabled = false,
   className = '',
   custom = true,
+  label,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState(value)
@@ -211,6 +214,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
           value={selected ?? ''}
           onChange={(e) => handleSelect(e.target.value)}
           disabled={disabled}
+          aria-label={label ? `${label} 선택` : '선택'}
         >
           <option value="" disabled>
             {placeholder}
@@ -246,6 +250,7 @@ export const SelectBox: React.FC<SelectBoxProps> = ({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls={isOpen ? 'selectbox-listbox' : undefined}
+        aria-label={label ? `${label} 선택` : '선택'}
         onKeyDown={handleKeyDown}
         onClick={() => (isOpen ? closeMenu() : openMenu())}
         tabIndex={0}

@@ -138,7 +138,7 @@
   }
 
   option {
-    &:first-child {
+    &.disabled {
       display: none;
     }
   }

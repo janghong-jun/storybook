@@ -13,6 +13,8 @@ export interface ButtonProps {
   backgroundColor?: string
   /** 버튼 비활성화 여부 */
   disabled?: boolean
+  /** Storybook 11용 ariaLabel */
+  ariaLabel?: string | false
 }
 
 /** Button UI 컴포넌트 */
@@ -23,6 +25,7 @@ export const Button = ({
   className,
   backgroundColor,
   disabled = false,
+  ariaLabel = false,
   ...props
 }: ButtonProps) => {
   const classes = ['btn', size, level]
@@ -33,6 +36,7 @@ export const Button = ({
       type="button"
       {...(classes.length ? { className: classes.join(' ') } : {})}
       {...(backgroundColor ? { style: { backgroundColor } } : {})}
+      aria-label={ariaLabel === false ? undefined : ariaLabel}
       {...props}
       disabled={disabled}
     >
