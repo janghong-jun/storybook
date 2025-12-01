@@ -1,24 +1,26 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import {
-  Button,
-  Accordion,
-  Tooltip,
-  Modal,
-  SystemAlert,
-  Toast,
-  Breadcrumb,
-  Pagination,
-  Checkbox,
-  Switch,
-  RadioGroup,
-  TextArea,
-  SelectBox,
-  DateRangePicker,
-  Table,
-} from '@/components/UI'
+import { Button } from '@/components/UI/Button'
+import { Accordion } from '@/components/UI/Accordion'
+import { Tooltip } from '@/components/UI/Tooltip'
+import { Modal } from '@/components/UI/Modal'
+import { SystemAlert } from '@/components/UI/SystemAlert'
+import { Toast } from '@/components/UI/Toast'
+import { Breadcrumb } from '@/components/UI/Breadcrumb'
+import { Pagination } from '@/components/UI/Pagination'
+import { Table } from '@/components/UI/Table'
+import { BoardList } from '@/components/UI/BoardList'
+import { Card } from '@/components/UI/Card'
+import { CardList } from '@/components/UI/CardList'
+import { Checkbox } from '@/components/Form/Checkbox'
+import { Switch } from '@/components/Form/Switch'
+import { RadioGroup } from '@/components/Form/RadioGroup'
+import { TextArea } from '@/components/Form/TextArea'
+import { SelectBox } from '@/components/Form/Selectbox'
+import { DateRangePicker } from '@/components/Form/DateRangePicker'
+
 import { useState } from 'react'
 import { useViewport } from '@/contexts/viewPortContext'
-import styles from '@/styles/pages.module.scss' // 추가: 페이지 스타일 import
+import styles from './pages.module.scss' // 추가: 페이지 스타일 import
 
 export default function DemoPage() {
   const [isOpen, setIsOpen] = useState(false)
@@ -36,6 +38,43 @@ export default function DemoPage() {
   const [value, setValue] = useState()
   const [text, setText] = useState('')
 
+  const mockData = [
+    {
+      title: '클린한 UI 구성 가이드',
+      description: '프론트 개발자가 꼭 알아야 할 UI 패턴들을 정리했습니다.',
+      imageUrl: 'https://picsum.photos/seed/card1/600/300',
+      altText: 'UI 패턴 이미지',
+      linkUrl: '/guide/ui',
+    },
+    {
+      title: 'Next.js 퍼포먼스 최적화',
+      description: '이미지 최적화부터 라우팅 전략까지 한 번에 보기.',
+      imageUrl: 'https://picsum.photos/seed/card2/600/300',
+      altText: 'Next.js 퍼포먼스 이미지',
+      linkUrl: '/guide/performance',
+    },
+    {
+      title: 'React 상태 관리 전략',
+      description: 'Context, Zustand, Jotai 등 상태 관리 선택 기준.',
+      imageUrl: 'https://picsum.photos/seed/card3/600/300',
+      altText: 'React 상태 관리 이미지',
+      linkUrl: '/guide/state',
+    },
+    {
+      title: 'UI 컴포넌트 시스템 만들기',
+      description: 'Button부터 Modal까지 컴포넌트 설계 정석.',
+      imageUrl: 'https://picsum.photos/seed/card4/600/300',
+      altText: '컴포넌트 설계 이미지',
+      linkUrl: '/guide/components',
+    },
+    {
+      title: 'SCSS 구조 설계 팁',
+      description: '믿고 쓰는 폴더 구조 + 네이밍 룰.',
+      imageUrl: 'https://picsum.photos/seed/card5/600/300',
+      altText: 'SCSS 구조 이미지',
+      linkUrl: '/guide/scss',
+    },
+  ]
   return (
     <div className={styles.demoPage}>
       {' '}
@@ -409,6 +448,41 @@ export default function DemoPage() {
               { content: 'Node.js' },
               { content: 'API 개발 실습' },
             ],
+          ]}
+        />
+      </section>
+      <section className={styles.section}>
+        <h3>카드 컴포넌트</h3>
+        <Card
+          altText="Landscape"
+          description="A stunning view of mountains and lake at sunset."
+          imageUrl="https://picsum.photos/seed/slide1/600/300?w=1200&q=75"
+          linkUrl="/details/landscape"
+          title="Beautiful Landscape"
+        />
+      </section>
+      <section className={styles.section}>
+        <h3>카드 리스트 컴포넌트</h3>
+        <CardList cards={mockData} columns={3} gap={12} />
+      </section>
+      <section className={styles.section}>
+        <h3>게시판 리스트 컴포넌트</h3>
+        <BoardList
+          items={[
+            {
+              description: '중요한 공지입니다.',
+              linkUrl: '/notice/1',
+              title: '공지사항 1',
+            },
+            {
+              linkUrl: '/notice/2',
+              title: '공지사항 2',
+            },
+            {
+              description: '업데이트 안내',
+              linkUrl: '/notice/3',
+              title: '공지사항 3',
+            },
           ]}
         />
       </section>

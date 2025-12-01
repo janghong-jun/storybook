@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { BoardList } from '@/components/UI/BoardList'
 
 import { useViewport } from '@/contexts/viewPortContext'
 
@@ -20,6 +21,11 @@ export default function NotFoundPage() {
       <Head>
         <title>404 - 페이지를 찾을 수 없습니다</title>
       </Head>
+      <BoardList
+        title="자주 찾는 페이지"
+        description="빠르게 이동할 수 있는 링크 모음"
+        linkUrl="/"
+      />
       <div className={`${styles.wrap} ${viewportClass}`}>
         <span aria-hidden className={styles.backgroundGlow} />
         <main id="main" role="main" className={styles.main}>

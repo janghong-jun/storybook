@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import React, { useState } from 'react'
 import { SelectBox, SelectBoxProps } from '@/components/Form/Selectbox'
@@ -20,16 +19,11 @@ const meta: Meta<SelectBoxProps> = {
       <div
         style={{
           display: 'flex',
-          position: 'relative',
-          minWidth: '100%',
-          minHeight: '30rem',
           justifyContent: 'center',
-          alignContent: 'center',
+          minHeight: '30rem',
         }}
       >
-        <div style={{ margin: 'auto' }}>
-          <Story />
-        </div>
+        <Story />
       </div>
     ),
   ],
@@ -37,7 +31,6 @@ const meta: Meta<SelectBoxProps> = {
 export default meta
 type Story = StoryObj<SelectBoxProps>
 
-/** 기본 SelectBox */
 export const Default: Story = {
   args: {
     options: [
@@ -46,31 +39,20 @@ export const Default: Story = {
       { label: '옵션 3', value: 'option3' },
     ],
     placeholder: '선택하세요',
-    value: '옵션 1',
+    value: 1,
   },
   render: (args) => {
-    const [value, setValue] = useState<string | number>()
-    return <SelectBox {...args} value={value} onChange={setValue} />
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<SelectBox
-  options={[
-    { label: '옵션 1', value: 'option1' },
-    { label: '옵션 2', value: 'option2' },
-    { label: '옵션 3', value: 'option3' },
-  ]}
-  placeholder="선택하세요"
-  value={value}
-  onChange={setValue}
-/>`,
-      },
-    },
+    return <SelectBoxWrapper {...args} />
+
+    function SelectBoxWrapper(props: SelectBoxProps) {
+      const [value, setValue] = React.useState<string | number>(
+        props.value ?? ''
+      )
+      return <SelectBox {...props} value={value} onChange={setValue} />
+    }
   },
 }
 
-/** 브라우저 기본 select */
 export const Native: Story = {
   args: {
     options: [
@@ -83,24 +65,11 @@ export const Native: Story = {
     value: 'option3',
   },
   render: (args) => {
-    const [value, setValue] = useState<string | number>()
-    return <SelectBox {...args} value={value} onChange={setValue} />
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<SelectBox
-  options={[
-    { label: '옵션 1', value: 'option1' },
-    { label: '옵션 2', value: 'option2' },
-    { label: '옵션 3', value: 'option3' },
-  ]}
-  placeholder="브라우저 기본 select"
-  value={value}
-  onChange={setValue}
-  custom={false}
-/>`,
-      },
-    },
+    return <SelectBoxWrapper {...args} />
+
+    function SelectBoxWrapper(props: SelectBoxProps) {
+      const [value, setValue] = useState<string | number>(props.value ?? '')
+      return <SelectBox {...props} value={value} onChange={setValue} />
+    }
   },
 }

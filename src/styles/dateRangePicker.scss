@@ -55,7 +55,7 @@
   }
 
   &:focus {
-    outline: 0.2rem solid #4579e3;
+    outline: 0.2rem solid var(--color-primary);
     outline-offset: 0.2rem;
     transition: all 0.2s ease;
   }
@@ -204,7 +204,7 @@
   cursor: pointer;
 
   &:focus {
-    outline: 0.2rem solid #4579e3;
+    outline: 0.2rem solid var(--color-primary);
     outline-offset: 0.2rem;
     transition: all 0.2s ease;
   }
@@ -242,7 +242,7 @@
   }
 
   &:focus {
-    outline: 0.2rem solid #4579e3;
+    outline: 0.2rem solid var(--color-primary);
     outline-offset: 0.2rem;
     transition: all 0.2s ease;
   }
@@ -336,7 +336,7 @@
   &:focus {
     background: #eaf1ff;
     color: #4579e3 !important;
-    outline: 0.2rem solid #4579e3;
+    outline: 0.2rem solid var(--color-primary);
     outline-offset: 0.2rem;
   }
 

@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { useState } from 'react'
 import { SystemAlert, SystemAlertProps } from '@/components/UI/SystemAlert'
-import { Button } from '@/components/UI'
+import { Button } from '@/components/UI/Button'
 
 const meta: Meta<SystemAlertProps> = {
   title: 'UI/SystemAlert',

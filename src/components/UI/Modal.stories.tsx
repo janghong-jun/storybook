@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { Modal, ModalProps } from '@/components/UI/Modal'
-import { Button } from '@/components/UI'
+import { Button } from '@/components/UI/Button'
 import { useState } from 'react'
 
 const meta: Meta<ModalProps> = {

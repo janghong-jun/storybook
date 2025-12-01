@@ -36,7 +36,7 @@ export interface SelectBoxProps {
   label?: string
 }
 
-/** SelectBox UI 컴포넌트 */
+/** Selectbox UI 컴포넌트 */
 export const SelectBox: React.FC<SelectBoxProps> = ({
   options,
   value,

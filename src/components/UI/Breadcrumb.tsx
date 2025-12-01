@@ -1,4 +1,3 @@
-// components/UI/Breadcrumb/Breadcrumb.tsx
 import React from 'react'
 import Link from 'next/link'
 

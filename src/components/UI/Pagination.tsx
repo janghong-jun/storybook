@@ -1,4 +1,3 @@
-// components/UI/Pagination/Pagination.tsx
 import React from 'react'
 
 /** Pagination 컴포넌트 props */

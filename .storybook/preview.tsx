@@ -29,6 +29,7 @@ const preview: Preview = {
             'Accordion',
             'Breadcrumb',
             'Button',
+            'Card',
             'Divider',
             'Modal',
             'Pagination',
