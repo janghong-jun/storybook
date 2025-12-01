@@ -457,7 +457,8 @@ export default function DemoPage() {
           altText="Landscape"
           description="A stunning view of mountains and lake at sunset."
           imageUrl="https://picsum.photos/seed/slide1/600/300?w=1200&q=75"
-          linkUrl="/details/landscape"
+          linkUrl="www.daum.net"
+          target="_blank"
           title="Beautiful Landscape"
         />
       </section>
@@ -471,8 +472,9 @@ export default function DemoPage() {
           items={[
             {
               description: '중요한 공지입니다.',
-              linkUrl: '/notice/1',
+              linkUrl: 'naver.com',
               title: '공지사항 1',
+              target: '_blank',
             },
             {
               linkUrl: '/notice/2',

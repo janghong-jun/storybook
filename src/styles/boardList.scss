@@ -29,6 +29,9 @@
       display: block;
       font-size: 1.6rem;
       margin: 0 0 0.4rem 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
 
     &-description {
