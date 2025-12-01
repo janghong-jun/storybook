@@ -27,9 +27,11 @@ const preview: Preview = {
           'UI',
           [
             'Accordion',
+            'BoardList',
             'Breadcrumb',
             'Button',
             'Card',
+            'CardList',
             'Divider',
             'Modal',
             'Pagination',
