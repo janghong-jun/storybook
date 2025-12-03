@@ -15,10 +15,12 @@ export interface ButtonProps {
   disabled?: boolean
   /** Storybook 11용 ariaLabel */
   ariaLabel?: string | false
+  id?: string
 }
 
 /** Button UI 컴포넌트 */
 export const Button = ({
+  id,
   label,
   level = 'primary',
   size = 'medium',
@@ -34,6 +36,7 @@ export const Button = ({
   return (
     <button
       type="button"
+      id={id}
       {...(classes.length ? { className: classes.join(' ') } : {})}
       {...(backgroundColor ? { style: { backgroundColor } } : {})}
       aria-label={ariaLabel === false ? undefined : ariaLabel}

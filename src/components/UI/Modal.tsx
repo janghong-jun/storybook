@@ -79,7 +79,7 @@ export const Modal = ({
     document.addEventListener('keydown', handleKeyDown)
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = originalOverflow.current
+      document.body.style.overflow = ''
     }
   }, [isOpen, onClose])
 
