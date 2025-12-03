@@ -21,41 +21,56 @@
 }
 
 .demoPage h4 {
-  margin-bottom: var(--space-lg);
   font-size: var(--text-lg);
   font-weight: 600;
   color: var(--color-foreground);
 }
 
-/* Common section styles */
-.section-base {
-  margin-bottom: var(--space-xl);
-  padding: var(--space-xl);
-  border: 0.1rem solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-sm);
-}
+.accordionTest {
+  > div > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.section {
-  @extend .section-base;
-}
+    &:has(.section) {
+      height: auto;
+    }
+    &:has(.datePickerSection),
+    &:has(.selectBoxSection),
+    &:has(.modalSection) {
+      height: 50rem;
+    }
+    &:has(.tooltipSection) {
+      height: 20rem;
+    }
+  } /* Common section styles */
+  .section-base {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0;
+    border: none !important;
+    padding: 0 !important;
+    background: none !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    box-shadow: none !important;
+  }
+  .section {
+    @extend .section-base;
+  }
 
-.sectionRow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-lg);
-  @extend .section-base;
-}
+  .sectionRow {
+    @extend .section-base;
+  }
 
-/* Component spacing within sections */
-.section > * + * {
-  margin-top: var(--space-lg);
+  .sectionRow > * + * {
+    margin-top: 0;
+  }
 }
-
-.sectionRow > * + * {
-  margin-top: 0;
+.datePickerSection {
+  margin-bottom: auto;
 }
 
 /* Form elements in modal */
@@ -72,20 +87,7 @@
     color: var(--color-foreground);
   }
 
-  input {
-    padding: var(--space-sm) var(--space-md);
-    border: 0.1rem solid var(--color-border);
-    border-radius: var(--radius-md);
-    font-size: var(--text-base);
-    transition: border-color 0.2s ease;
-
-    &:focus {
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 0.3rem rgba(var(--color-primary-rgb), 0.1);
-    }
-  }
-
-  button {
+  button[type='submit'] {
     padding: var(--space-sm) var(--space-lg);
     border: none;
     border-radius: var(--radius-md);

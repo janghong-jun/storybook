@@ -1,4 +1,11 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+'use client'
+
+import Image from 'next/image'
+import React from 'react'
+import styles from './pages.module.scss'
+import { useState } from 'react'
+import { useViewport } from '@/contexts/viewPortContext'
+
 import { Button } from '@/components/UI/Button'
 import { Accordion } from '@/components/UI/Accordion'
 import { Tooltip } from '@/components/UI/Tooltip'
@@ -11,33 +18,42 @@ import { Table } from '@/components/UI/Table'
 import { BoardList } from '@/components/UI/BoardList'
 import { Card } from '@/components/UI/Card'
 import { CardList } from '@/components/UI/CardList'
+import { Divider } from '@/components/UI/Divider'
+import { Tab } from '@/components/UI/Tab'
+import { SwiperComponent } from '@/components/UI/Swiper'
 import { Checkbox } from '@/components/Form/Checkbox'
 import { Switch } from '@/components/Form/Switch'
 import { RadioGroup } from '@/components/Form/RadioGroup'
 import { TextArea } from '@/components/Form/TextArea'
 import { SelectBox } from '@/components/Form/Selectbox'
 import { DateRangePicker } from '@/components/Form/DateRangePicker'
+import { Input } from '@/components/Form/Input'
 
-import { useState } from 'react'
-import { useViewport } from '@/contexts/viewPortContext'
-import styles from './pages.module.scss' // 추가: 페이지 스타일 import
+export default function TestPage() {
+  const { viewport } = useViewport()
 
-export default function DemoPage() {
   const [isOpen, setIsOpen] = useState(false)
   const [alertOpen, setAlertOpen] = useState(false)
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [showToast, setShowToast] = useState(false)
-
   const [page, setPage] = useState(1)
-  const items = [
-    { title: '첫 번째 항목', content: <p>첫 번째 내용입니다.</p> },
-    { title: '두 번째 항목', content: <p>두 번째 내용입니다.</p> },
-  ]
   const [checked, setChecked] = useState(false)
-  const [selected, setSelected] = useState()
-  const [value, setValue] = useState()
+  const [selected, setSelected] = useState('')
+  const [value, setValue] = useState('')
   const [text, setText] = useState('')
 
+  // Input 컴포넌트들 상태 관리 추가
+  const [inputValue, setInputValue] = useState('') // 기본 Input 상태
+  const [inputEmail, setInputEmail] = useState('') // 이메일용
+  const [modalName, setModalName] = useState('') // Modal 내 name
+  const [modalEmail, setModalEmail] = useState('') // Modal 내 email
+  const [inputPassword, setInputPassword] = useState('')
+  const [inputNumber, setInputNumber] = useState('')
+  const [inputTextDisabled, setInputTextDisabled] = useState('수정 불가')
+  const [inputReadOnly] = useState('읽기만 가능')
+  const [inputLabelHidden, setInputLabelHidden] = useState('')
+  const [inputCheckValue, setInputCheckValue] = useState('')
+  const [inputCheckError, setInputCheckError] = useState('')
   const mockData = [
     {
       title: '클린한 UI 구성 가이드',
@@ -75,421 +91,536 @@ export default function DemoPage() {
       linkUrl: '/guide/scss',
     },
   ]
+
+  const items = [
+    {
+      title: 'Button Component',
+      content: (
+        <div className={styles.sectionRow}>
+          <Button
+            label="primary 버튼"
+            level="primary"
+            onClick={() => alert('클릭!')}
+          />
+          <Button label="secondary" level="secondary" />
+          <Button label="tertiary" level="tertiary" />
+        </div>
+      ),
+    },
+    {
+      title: 'Modal, SystemAlert, Toast Components',
+      content: (
+        <div className={`${styles.sectionRow} ${styles.modalSection}`}>
+          <Button label="모달 열기" onClick={() => setIsOpen(true)} />
+          <Modal
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            label="프로필 설정"
+          >
+            <form className={styles.modalForm}>
+              <Input
+                label="이름"
+                type="text"
+                placeholder="홍길동"
+                value={modalName}
+                onChange={(e) => setModalName(e.target.value)}
+              />
+              <Input
+                label="이메일"
+                type="email"
+                placeholder="example@email.com"
+                value={modalEmail}
+                onChange={(e) => setModalEmail(e.target.value)}
+              />
+              <button type="submit">저장</button>
+            </form>
+          </Modal>
+          <Button label="알럿 열기" onClick={() => setAlertOpen(true)} />
+          <Modal
+            isOpen={alertOpen}
+            onClose={() => setAlertOpen(false)}
+            label="프로필 설정"
+          >
+            <p>저장되었습니다.</p>
+          </Modal>
+          <Button label="컨펌 열기" onClick={() => setConfirmOpen(true)} />
+          <SystemAlert
+            visible={confirmOpen}
+            message="이 동작은 되돌릴 수 없습니다."
+            title={'false'}
+            hasConfirm={true}
+            hasCancel={true}
+            confirmLabel="삭제"
+            cancelLabel="취소"
+            onConfirm={() => {
+              console.log('삭제 실행')
+              setConfirmOpen(false)
+            }}
+            onCancel={() => {
+              console.log('사용자 취소')
+              setConfirmOpen(false)
+            }}
+          />
+          <Button label="토스트 열기" onClick={() => setShowToast(true)} />
+          <Toast
+            message="작업이 완료되었습니다!"
+            visible={showToast}
+            onClose={() => setShowToast(false)}
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'Tooltip Component',
+      content: (
+        <div className={`${styles.sectionRow} ${styles.tooltipSection}`}>
+          <Tooltip content="툴팁 내용" label="툴팁" />
+          <Tooltip content="툴팁 내용" label="툴팁" iconClass="icon-info" />
+        </div>
+      ),
+    },
+    {
+      title: 'Breadcrumb Component',
+      content: (
+        <div className={styles.section}>
+          <Breadcrumb
+            items={[
+              { label: 'UI 컴포넌트', href: '/ui' },
+              { label: '테스트', href: '/ui/test' },
+            ]}
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'Pagination Component',
+      content: (
+        <div className={styles.section}>
+          {viewport === 'mobile' ? (
+            <Pagination
+              total={1000}
+              perPage={20}
+              currentPage={page}
+              onPageChange={setPage}
+              showCount={1}
+            />
+          ) : (
+            <Pagination
+              total={1000}
+              perPage={10}
+              currentPage={page}
+              onPageChange={setPage}
+              showCount={3}
+            />
+          )}
+        </div>
+      ),
+    },
+    {
+      title: 'Table Component',
+      content: (
+        <div className={`${styles.section} ${styles.tableSection}`}>
+          <Table
+            type="horizontal"
+            headData={[
+              [
+                { content: '이름', isHeader: true },
+                { content: '나이', isHeader: true },
+                { content: '직업', isHeader: true },
+                { content: '지역', isHeader: true },
+              ],
+            ]}
+            bodyData={[
+              [
+                { content: '김철수' },
+                { content: '25' },
+                { content: '개발자' },
+                { content: '서울' },
+              ],
+              [
+                { content: '이영희' },
+                { content: '30' },
+                { content: '디자이너' },
+                { content: '부산' },
+              ],
+              [
+                { content: '박민수' },
+                { content: '28' },
+                { content: '마케터' },
+                { content: '대구' },
+              ],
+            ]}
+            colWidths={[]}
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'Card Component',
+      content: (
+        <div className={styles.section}>
+          <Card
+            altText="Landscape"
+            description="A stunning view of mountains and lake at sunset."
+            imageUrl="https://picsum.photos/seed/slide1/600/300?w=1200&q=75"
+            linkUrl="www.daum.net"
+            target="_blank"
+            title="Beautiful Landscape"
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'CardList Component',
+      content: (
+        <div className={`${styles.section} ${styles.cardListSection}`}>
+          <CardList cards={mockData} columns={3} gap={12} />
+        </div>
+      ),
+    },
+    {
+      title: 'boardList Component',
+      content: (
+        <div className={styles.section}>
+          <BoardList
+            items={[
+              {
+                description: '중요한 공지입니다.',
+                linkUrl: 'naver.com',
+                title: '공지사항 1',
+                target: '_blank',
+              },
+              {
+                linkUrl: '/notice/2',
+                title: '공지사항 2',
+              },
+              {
+                description: '업데이트 안내',
+                linkUrl: '/notice/3',
+                title: '공지사항 3',
+              },
+            ]}
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'Checkbox Component',
+      content: (
+        <div className={styles.sectionRow}>
+          <Checkbox label="체크박스" checked={checked} onChange={setChecked} />
+          <Checkbox
+            label="체크박스2"
+            onChange={() => console.log('체크박스2')}
+          />
+          <Checkbox
+            label="체크박스3"
+            onChange={() => console.log('체크박스3')}
+            checked={true}
+          />
+          <Switch label="스위치" checked={checked} onChange={setChecked} />
+        </div>
+      ),
+    },
+    {
+      title: 'RadioGroup Component',
+      content: (
+        <div className={styles.section}>
+          <RadioGroup
+            options={[
+              { label: '옵션1', value: 'option1' },
+              { label: '옵션2', value: 'option2' },
+            ]}
+            selectedValue={selected}
+            onChange={setSelected}
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'TextArea Component',
+      content: (
+        <div className={styles.section}>
+          <TextArea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            label="내용"
+            maxLength={500}
+            showCounter
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'SelectBox Component',
+      content: (
+        <>
+          <div className={`${styles.section} ${styles.selectBoxSection}`}>
+            <h4>커스텀 셀렉트</h4>
+            <SelectBox
+              options={[
+                { label: '옵션 1', value: 'option1' },
+                { label: '옵션 2', value: 'option2' },
+                { label: '옵션 3', value: 'option3' },
+              ]}
+              placeholder="선택하세요"
+              value={value}
+              onChange={setValue}
+            />
+            <h4>기본 셀렉트</h4>
+            <SelectBox
+              options={[
+                { label: '옵션 1', value: 'option1' },
+                { label: '옵션 2', value: 'option2' },
+                { label: '옵션 3', value: 'option3' },
+              ]}
+              placeholder="선택하세요"
+              value={value}
+              onChange={setValue}
+              custom={false}
+            />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: 'DateRangePicker Component',
+      content: (
+        <div className={`${styles.section} ${styles.datePickerSection}`}>
+          <DateRangePicker
+            holidays={[
+              new Date(2025, 1, 1),
+              new Date(2025, 3, 1),
+              new Date(2025, 5, 5),
+              new Date(2025, 6, 6),
+              new Date(2025, 8, 15),
+              new Date(2025, 10, 3),
+              new Date(2025, 10, 9),
+              new Date(2025, 12, 25),
+            ]}
+          />
+          <DateRangePicker
+            type="range"
+            holidays={[
+              new Date(2025, 1, 1),
+              new Date(2025, 3, 1),
+              new Date(2025, 5, 5),
+              new Date(2025, 6, 6),
+              new Date(2025, 8, 15),
+              new Date(2025, 10, 3),
+              new Date(2025, 10, 9),
+              new Date(2025, 12, 25),
+            ]}
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'Input Component',
+      content: (
+        <div className={styles.section}>
+          {/* 이름 */}
+          <Input
+            clearable
+            label="이름"
+            placeholder="이름을 입력하세요"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+
+          {/* 이메일 */}
+          <Input
+            label="이메일"
+            type="email"
+            placeholder="이메일 입력"
+            value={inputEmail}
+            onChange={(e) => setInputEmail(e.target.value)}
+          />
+
+          {/* 비밀번호 */}
+          <Input
+            label="비밀번호"
+            type="password"
+            placeholder="비밀번호"
+            value={inputPassword}
+            onChange={(e) => setInputPassword(e.target.value)}
+          />
+
+          {/* 숫자 입력 */}
+          <Input
+            label="숫자 입력"
+            type="number"
+            placeholder="숫자 입력"
+            value={inputNumber}
+            onChange={(e) => setInputNumber(e.target.value)}
+          />
+
+          {/* 외부에서 강제 error 제어하는 케이스 */}
+          {/* disabled */}
+          <Input
+            label="비활성 상태"
+            value={inputTextDisabled}
+            disabled
+            onChange={(e) => setInputTextDisabled(e.target.value)}
+          />
+
+          {/* readOnly */}
+          <Input label="읽기 전용" value={inputReadOnly} readOnly />
+
+          {/* labelHidden */}
+          <Input
+            label="숨겨진 레이블"
+            labelHidden
+            placeholder="레이블이 시각적으로 숨겨졌습니다."
+            value={inputLabelHidden}
+            onChange={(e) => setInputLabelHidden(e.target.value)}
+          />
+
+          {/* Error */}
+          <Input
+            label="에러 상태(test 입력시 통과)"
+            value={inputCheckValue}
+            onChange={(e) => {
+              const val = e.target.value
+              setInputCheckValue(val)
+              if (val === '') {
+                setInputCheckError('값을 입력하세요')
+              } else if (val !== 'test') {
+                setInputCheckError('올바른 값을 입력하세요')
+              } else {
+                setInputCheckError('')
+              }
+            }}
+            error={inputCheckError}
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'Divider Component',
+      content: (
+        <div className={styles.section}>
+          <Divider type="solid" />
+          <Divider type="dashed" />
+          <Divider type="dotted" />
+          <Divider color="dark" />
+          <Divider color="gray" />
+          <Divider color="primary" />
+          <Divider thickness="thin" />
+          <Divider thickness="medium" />
+          <Divider thickness="thick" />
+        </div>
+      ),
+    },
+    {
+      title: 'Tab Component',
+      content: (
+        <div className={styles.section}>
+          <Tab
+            items={[
+              {
+                content: 'Home Content',
+                label: 'Home',
+              },
+              {
+                content: 'Profile Content',
+                label: 'Profile',
+              },
+              {
+                content: 'Settings Content',
+                disabled: true,
+                label: 'Settings',
+              },
+            ]}
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'Swiper Component',
+      content: (
+        <div className={styles.section}>
+          <SwiperComponent
+            items={[
+              {
+                content: (
+                  <Image
+                    src="https://picsum.photos/seed/slide1/600/300"
+                    alt="푸른 바다가 보이는 해변 풍경"
+                    width={600}
+                    height={300}
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      height: 'auto',
+                      borderRadius: '1rem',
+                      objectFit: 'cover',
+                      verticalAlign: 'top',
+                    }}
+                    loading="eager"
+                  />
+                ),
+              },
+              {
+                content: (
+                  <Image
+                    src="https://picsum.photos/seed/slide2/600/300"
+                    alt="숲속 햇살이 비치는 길"
+                    width={600}
+                    height={300}
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      height: 'auto',
+                      borderRadius: '1rem',
+                      objectFit: 'cover',
+                      verticalAlign: 'top',
+                    }}
+                    loading="eager"
+                  />
+                ),
+              },
+              {
+                content: (
+                  <Image
+                    src="https://picsum.photos/seed/slide3/600/300"
+                    alt="도심의 야경"
+                    width={600}
+                    height={300}
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      height: 'auto',
+                      borderRadius: '1rem',
+                      objectFit: 'cover',
+                      verticalAlign: 'top',
+                    }}
+                    loading="eager"
+                  />
+                ),
+              },
+            ]}
+            navigation
+            pagination
+          />
+        </div>
+      ),
+    },
+  ]
+
   return (
     <div className={styles.demoPage}>
-      {' '}
-      {/* 스타일 클래스 적용 */}
       <h1>UI 컴포넌트 테스트</h1>
-      <section className={styles.sectionRow}>
-        <Button
-          label="primary 버튼"
-          level="primary"
-          onClick={() => alert('클릭!')}
-        />
-        <Button label="secondary" level="secondary" />
-        <Button label="tertiary" level="tertiary" />
-      </section>
-      <section className={styles.section}>
+
+      <div className={styles.section}>
         <Accordion
           items={items}
-          defaultOpenIndex={1}
-          allowMultipleOpen={true}
+          allowMultipleOpen
+          initiallyAllOpen={false}
+          showToggleAll
+          className={styles.accordionTest}
         />
-      </section>
-      <section className={styles.section}>
-        <Tooltip
-          label="도움말"
-          content={`
-            <div>
-              <strong>TIP:</strong> 여기에 <em>HTML 태그</em>도 들어갈 수 있어요!
-              <br />
-              <a href="#">자세히 보기</a>
-            </div>
-            `}
-        />
-      </section>
-      <section className={styles.section}>
-        <Button label="모달 열기" onClick={() => setIsOpen(true)} />
-        <Modal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          label="프로필 설정"
-        >
-          <form className={styles.modalForm}>
-            <label>
-              이름:
-              <input type="text" placeholder="홍길동" />
-            </label>
-            <label>
-              이메일:
-              <input type="email" placeholder="example@email.com" />
-            </label>
-            <button type="submit">저장</button>
-          </form>
-        </Modal>
-      </section>
-      <section className={styles.section}>
-        <Button label="알럿 열기" onClick={() => setAlertOpen(true)} />
-        <SystemAlert
-          visible={alertOpen}
-          message="저장되었습니다."
-          onClose={() => setAlertOpen(false)}
-        />
-      </section>
-      <section className={styles.section}>
-        <Button label="컨펌 열기" onClick={() => setConfirmOpen(true)} />
-        <SystemAlert
-          visible={confirmOpen}
-          message="이 동작은 되돌릴 수 없습니다."
-          title={'false'}
-          hasConfirm={true}
-          hasCancel={true}
-          confirmLabel="삭제"
-          cancelLabel="취소"
-          onConfirm={() => {
-            console.log('삭제 실행')
-            setConfirmOpen(false)
-          }}
-          onCancel={() => {
-            console.log('사용자 취소')
-            setConfirmOpen(false)
-          }}
-        />
-      </section>
-      <section className={styles.section}>
-        <Button label="토스트 열기" onClick={() => setShowToast(true)} />
-        <Toast
-          message="작업이 완료되었습니다!"
-          visible={showToast}
-          onClose={() => setShowToast(false)}
-        />
-      </section>
-      <section className={styles.section}>
-        <Breadcrumb
-          items={[
-            { label: 'UI 컴포넌트', href: '/ui' },
-            { label: '테스트', href: '/ui/test' },
-          ]}
-        />
-      </section>
-      <section className={styles.section}>
-        {(() => {
-          const { viewport } = useViewport()
-          if (viewport === 'mobile') {
-            return (
-              <>
-                <Pagination
-                  total={1000}
-                  perPage={20}
-                  currentPage={page}
-                  onPageChange={setPage}
-                  showCount={1}
-                />
-              </>
-            )
-          } else {
-            return (
-              <>
-                <Pagination
-                  total={1000}
-                  perPage={10}
-                  currentPage={page}
-                  onPageChange={setPage}
-                  showCount={3}
-                />
-              </>
-            )
-          }
-        })()}
-      </section>
-      <section className={styles.sectionRow}>
-        <Checkbox label="스위치" checked={checked} onChange={setChecked} />
-        <Checkbox
-          label="체크박스3"
-          onChange={() => {
-            console.log('체크박스3')
-          }}
-        />
-        <Checkbox
-          label="체크박스3"
-          onChange={() => {
-            console.log('체크박스3')
-          }}
-          checked={true}
-        />
-        <Switch label="스위치" checked={checked} onChange={setChecked} />
-      </section>
-      <section className={styles.section}>
-        <RadioGroup
-          options={[
-            { label: '옵션1', value: 'option1' },
-            { label: '옵션2', value: 'option2' },
-          ]}
-          selectedValue={selected}
-          onChange={setSelected}
-        />
-      </section>
-      <section className={styles.section}>
-        <TextArea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          label="내용"
-          maxLength={500}
-          showCounter
-        />
-      </section>
-      <section className={styles.section}>
-        <SelectBox
-          options={[
-            { label: '옵션 1', value: 'option1' },
-            { label: '옵션 2', value: 'option2' },
-            { label: '옵션 3', value: 'option3' },
-          ]}
-          placeholder="선택하세요"
-          value={value}
-          onChange={setValue}
-        />
-      </section>
-      <section className={styles.section}>
-        <h4>기본 셀렉트</h4>
-        <SelectBox
-          options={[
-            { label: '옵션 1', value: 'option1' },
-            { label: '옵션 2', value: 'option2' },
-            { label: '옵션 3', value: 'option3' },
-          ]}
-          placeholder="선택하세요"
-          value={value}
-          onChange={setValue}
-          custom={false}
-        />
-      </section>
-      <section className={styles.section}>
-        <h4>캘린더 컴포넌트</h4>
-        <DateRangePicker
-          holidays={[
-            new Date(2025, 1, 1), // 신정 (1월 1일)
-            new Date(2025, 3, 1), // 삼일절 (3월 1일)
-            new Date(2025, 5, 5), // 어린이날 (5월 5일)
-            new Date(2025, 6, 6), // 현충일 (6월 6일)
-            new Date(2025, 8, 15), // 광복절 (8월 15일)
-            new Date(2025, 10, 3), // 개천절 (10월 3일)
-            new Date(2025, 10, 9), // 한글날 (10월 9일)
-            new Date(2025, 12, 25), // 크리스마스 (12월 25일)
-          ]}
-        />
-        <DateRangePicker
-          type="range"
-          holidays={[
-            new Date(2025, 1, 1), // 신정 (1월 1일)
-            new Date(2025, 3, 1), // 삼일절 (3월 1일)
-            new Date(2025, 5, 5), // 어린이날 (5월 5일)
-            new Date(2025, 6, 6), // 현충일 (6월 6일)
-            new Date(2025, 8, 15), // 광복절 (8월 15일)
-            new Date(2025, 10, 3), // 개천절 (10월 3일)
-            new Date(2025, 10, 9), // 한글날 (10월 9일)
-            new Date(2025, 12, 25), // 크리스마스 (12월 25일)
-          ]}
-        />
-      </section>
-      {/* 테이블 컴포넌트 테스트 */}
-      <section className={styles.section}>
-        <h3>테이블 컴포넌트</h3>
-
-        <h4>가로형 테이블</h4>
-        <Table
-          type="horizontal"
-          headData={[
-            [
-              { content: '이름', isHeader: true },
-              { content: '나이', isHeader: true },
-              { content: '직업', isHeader: true },
-              { content: '지역', isHeader: true },
-            ],
-          ]}
-          bodyData={[
-            [
-              { content: '김철수' },
-              { content: '25' },
-              { content: '개발자' },
-              { content: '서울' },
-            ],
-            [
-              { content: '이영희' },
-              { content: '30' },
-              { content: '디자이너' },
-              { content: '부산' },
-            ],
-            [
-              { content: '박민수' },
-              { content: '28' },
-              { content: '마케터' },
-              { content: '대구' },
-            ],
-          ]}
-        />
-
-        <h4>세로형 테이블</h4>
-        <Table
-          type="vertical"
-          bodyData={[
-            [{ content: '이름' }, { content: '김철수' }],
-            [{ content: '나이' }, { content: '25세' }],
-            [{ content: '직업' }, { content: '프론트엔드 개발자' }],
-            [{ content: '경력' }, { content: '3년' }],
-          ]}
-        />
-
-        <h4>텍스트 정렬 예시</h4>
-        <Table
-          type="horizontal"
-          headData={[
-            [
-              { content: '왼쪽 정렬', isHeader: true },
-              { content: '가운데 정렬', isHeader: true },
-              { content: '오른쪽 정렬', isHeader: true },
-              { content: '기본', isHeader: true },
-            ],
-          ]}
-          bodyData={[
-            [
-              {
-                content: '왼쪽으로 정렬된 긴 텍스트입니다',
-                className: 'align-left',
-              },
-              { content: '가운데 정렬', className: 'align-center' },
-              { content: '₩999,999', className: 'align-right' },
-              { content: '기본 가운데' },
-            ],
-            [
-              { content: '짧은 텍스트', className: 'align-left' },
-              { content: '중앙', className: 'align-center' },
-              { content: '우측', className: 'align-right' },
-              { content: 'Default' },
-            ],
-          ]}
-        />
-
-        <h4>셀 병합이 포함된 테이블</h4>
-        <Table
-          type="horizontal"
-          headData={[
-            [
-              { content: '카테고리', isHeader: true },
-              { content: '제품명', isHeader: true },
-              { content: '가격', isHeader: true },
-              { content: '수량', isHeader: true },
-            ],
-          ]}
-          colWidths={['15%', '30%', '25%', '30%']}
-          bodyData={[
-            [
-              { content: '스마트폰', isHeader: true, rowSpan: 2 },
-              { content: '갤럭시 S24' },
-              { content: '₩1,200,000' },
-              { content: '50개' },
-            ],
-            [
-              { content: 'iPhone 15' },
-              { content: '₩1,500,000' },
-              { content: '30개' },
-            ],
-            [
-              { content: '노트북', isHeader: true, rowSpan: 2 },
-              { content: 'MacBook Air' },
-              { content: '₩1,800,000' },
-              { content: '20개' },
-            ],
-            [
-              { content: 'Surface Pro' },
-              { content: '₩2,000,000' },
-              { content: '15개' },
-            ],
-            [
-              { content: '합계', isHeader: true },
-              {
-                content: '₩5,300,000',
-                isHeader: true,
-                colSpan: 2,
-                className: 'align-right',
-              },
-              { content: '115개', isHeader: true },
-            ],
-          ]}
-        />
-
-        <h4>다중 행 헤더 테이블</h4>
-        <Table
-          type="horizontal"
-          headData={[
-            [
-              { content: '시간', isHeader: true, rowSpan: 2 },
-              { content: '월요일', isHeader: true, colSpan: 2 },
-              { content: '화요일', isHeader: true, colSpan: 2 },
-            ],
-            [
-              { content: '이론', isHeader: true },
-              { content: '실습', isHeader: true },
-              { content: '이론', isHeader: true },
-              { content: '실습', isHeader: true },
-            ],
-          ]}
-          bodyData={[
-            [
-              { content: '09:00-10:30', isHeader: true },
-              { content: '프론트엔드 기초' },
-              { content: 'HTML/CSS 실습' },
-              { content: '자바스크립트' },
-              { content: 'DOM 조작 실습' },
-            ],
-            [
-              { content: '10:45-12:15', isHeader: true },
-              { content: '반응형 디자인', colSpan: 2 },
-              { content: 'Node.js' },
-              { content: 'API 개발 실습' },
-            ],
-          ]}
-        />
-      </section>
-      <section className={styles.section}>
-        <h3>카드 컴포넌트</h3>
-        <Card
-          altText="Landscape"
-          description="A stunning view of mountains and lake at sunset."
-          imageUrl="https://picsum.photos/seed/slide1/600/300?w=1200&q=75"
-          linkUrl="www.daum.net"
-          target="_blank"
-          title="Beautiful Landscape"
-        />
-      </section>
-      <section className={styles.section}>
-        <h3>카드 리스트 컴포넌트</h3>
-        <CardList cards={mockData} columns={3} gap={12} />
-      </section>
-      <section className={styles.section}>
-        <h3>게시판 리스트 컴포넌트</h3>
-        <BoardList
-          items={[
-            {
-              description: '중요한 공지입니다.',
-              linkUrl: 'naver.com',
-              title: '공지사항 1',
-              target: '_blank',
-            },
-            {
-              linkUrl: '/notice/2',
-              title: '공지사항 2',
-            },
-            {
-              description: '업데이트 안내',
-              linkUrl: '/notice/3',
-              title: '공지사항 3',
-            },
-          ]}
-        />
-      </section>
+      </div>
     </div>
   )
 }
-
-DemoPage.pageTitle = '소개'
